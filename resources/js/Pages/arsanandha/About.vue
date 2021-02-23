@@ -96,6 +96,21 @@
                                     {{ work_experience.benchmark.duration.days }} Days</p>
                             </vk-card>
                         </div>
+                        <div>
+                            <div>
+                                <vk-card>
+                                    <img
+                                        src="https://www.korat.com/uploads/logo/default_logo_korat_d41mz583hw16099536991e73552cad61c999213751f89622eb6c.png"
+                                        width="160px"/>
+                                </vk-card>
+                            </div>
+                            <vk-card class="memessage">
+                                <vk-card-title class="colorful">Korat.com (MEMESSAGE)</vk-card-title>
+                                <p>From {{ work_experience.memessage.start }} To {{ work_experience.memessage.to }}</p>
+                                <p>Duration {{ work_experience.memessage.duration.months }} Months /
+                                    {{ work_experience.memessage.duration.days }} Days</p>
+                            </vk-card>
+                        </div>
                     </vk-grid>
                 </vk-card>
                 <br/>
@@ -166,11 +181,15 @@ let birthDayData = moment(new Date(1998, 0, 7, 15, 18, 30));
 let workExperienceData = {
     bizpotential: {
         start: moment(new Date(2020, 7, 10, 10, 10, 10)),
-        end: moment(new Date())
+        end: moment(new Date(2020,11,5,10,10,10))
     },
     benchmark: {
         start: moment(new Date(2020, 2, 2, 9, 0, 0)),
         end: moment(new Date(2020, 5, 30, 17, 0, 0))
+    },
+    memessage: {
+        start: moment(new Date(2020, 11, 17, 9, 0, 0)),
+        end: moment(new Date())
     }
 }
 let workExperienceDataDiff = {
@@ -215,6 +234,14 @@ export default {
                     duration: {
                         months: workExperienceDataDiff.benchmark.months(),
                         days: workExperienceDataDiff.benchmark.days()
+                    }
+                },
+                memessage: {
+                    start: moment(workExperienceData.memessage.start).format('LLLL'),
+                    to: moment(workExperienceData.memessage.end).format('LLLL'),
+                    duration: {
+                        months: workExperienceDataDiff.memessage.months(),
+                        days: workExperienceDataDiff.memessage.days()
                     }
                 }
             }
@@ -330,7 +357,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import url('https://fonts.googleapis.com/css?family=K2D&display=swap&subset=thai')
 @import "resources/sass/app"
 
 .bizpotential
@@ -340,6 +366,10 @@ export default {
 .benchmark
     background-color: pantone("2756-c")
     color: white
+
+.memessage
+    background-color: white
+    color: black
 
 .colorful.uk-card-title
     color: white
