@@ -181,20 +181,21 @@ let birthDayData = moment(new Date(1998, 0, 7, 15, 18, 30));
 let workExperienceData = {
     bizpotential: {
         start: moment(new Date(2020, 7, 10, 10, 10, 10)),
-        end: moment(new Date(2020,11,5,10,10,10))
+        end: moment(new Date(2020,10,5,10,10,10))
     },
     benchmark: {
         start: moment(new Date(2020, 2, 2, 9, 0, 0)),
         end: moment(new Date(2020, 5, 30, 17, 0, 0))
     },
     memessage: {
-        start: moment(new Date(2020, 11, 17, 9, 0, 0)),
+        start: moment(new Date(2020, 10, 17, 9, 0, 0)),
         end: moment(new Date())
     }
 }
 let workExperienceDataDiff = {
     bizpotential: moment.duration(workExperienceData.bizpotential.end.diff(workExperienceData.bizpotential.start)),
-    benchmark: moment.duration(workExperienceData.benchmark.end.diff(workExperienceData.benchmark.start))
+    benchmark: moment.duration(workExperienceData.benchmark.end.diff(workExperienceData.benchmark.start)),
+    memessage: moment.duration(workExperienceData.memessage.end.diff(workExperienceData.memessage.start))
 }
 
 export default {
@@ -368,8 +369,8 @@ export default {
     color: white
 
 .memessage
-    background-color: white
-    color: black
+    background-color: pantone("801-c")
+    color: white
 
 .colorful.uk-card-title
     color: white
