@@ -171,18 +171,18 @@ class ThankfulController extends Controller
     }
 
     public function test_personalization(Request $request){
-        $req = (object) $request->json()->all();
+        $req = $request->json()->all();
         $json_q = array(
-            "favArtistName"=>array($req->favArtistName),
-            "emotion"=>$req->emotion,
-            "personalizationGenre"=>array($req->personalizationGenre),
-            "temperatureOfHeartWarming"=>intval($req->temperatureOfHeartWarming),
-            "drunkPerson"=>$req->drunkPerson,
-            "sentimentality"=>doubleval($req->sentimentality),
-            "relationshipScore"=>intval($req->relationshipScore),
-            "indyScore"=>intval($req->indyScore)
+            "favArtistName"=>array($req['favArtistName']),
+            "emotion"=>$req['emotion'],
+            "personalizationGenre"=>array($req['personalizationGenre']),
+            "temperatureOfHeartWarming"=>intval($req['temperatureOfHeartWarming']),
+            "drunkPerson"=>$req['drunkPerson'],
+            "sentimentality"=>doubleval($req['sentimentality']),
+            "relationshipScore"=>intval($req['relationshipScore']),
+            "indyScore"=>intval($req['indyScore'])
         );
-        Log::info($req);
+        Log::info(print_r($req));
         return $this->personalization(json_encode($json_q));
     }
 
