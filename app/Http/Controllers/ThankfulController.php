@@ -173,9 +173,9 @@ class ThankfulController extends Controller
     public function test_personalization(Request $request){
         $req = $request->json()->all();
         $json_q = array(
-            "favArtistName"=>array($req['favArtistName']),
+            "favArtistName"=>$req['favArtistName'],
             "emotion"=>$req['emotion'],
-            "personalizationGenre"=>array($req['personalizationGenre']),
+            "personalizationGenre"=>$req['personalizationGenre'],
             "temperatureOfHeartWarming"=>intval($req['temperatureOfHeartWarming']),
             "drunkPerson"=>$req['drunkPerson'],
             "sentimentality"=>doubleval($req['sentimentality']),
