@@ -182,7 +182,7 @@ class ThankfulController extends Controller
             "relationshipScore"=>intval($req['relationshipScore']),
             "indyScore"=>intval($req['indyScore'])
         );
-        Log::info(print_r($req));
+        Log::debug(print_r($req,true));
         return $this->personalization(json_encode($json_q));
     }
 
