@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Spotify;
 use App\Models\Faculty;
 use App\Models\Thankful;
@@ -181,6 +182,7 @@ class ThankfulController extends Controller
             "relationshipScore"=>intval($req->relationshipScore),
             "indyScore"=>intval($req->indyScore)
         );
+        Log::info($req);
         return $this->personalization(json_encode($json_q));
     }
 
