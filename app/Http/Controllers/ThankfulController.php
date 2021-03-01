@@ -166,19 +166,20 @@ class ThankfulController extends Controller
         sort($valueMatrix['valence']);
         sort($valueMatrix['popularity']);
         sort($valueMatrix['key']);
-        return $valueMatrix;
+        return $this->spotifyRecommend($valueMatrix);
     }
 
-    public function test_personalization(){
+    public function test_personalization(Request $request){
+        $req = (object) $request->json()->all();
         $json_q = array(
-            "favArtistName"=>array("Gavin D","YOUNGOHM","TangBadVoice"),
-            "emotion"=>"positively",
-            "personalizationGenre"=>array("pop","hip-hop"),
-            "temperatureOfHeartWarming"=>2500,
-            "drunkPerson"=>true,
-            "sentimentality"=>0.6,
-            "relationshipScore"=>70,
-            "indyScore"=>20
+            "favArtistName"=>array($req->favArtistName),
+            "emotion"=>$req->emotion,
+            "personalizationGenre"=>array($req->personalizationGenre),
+            "temperatureOfHeartWarming"=>intval($req->temperatureOfHeartWarming),
+            "drunkPerson"=>$req->drunkPerson,
+            "sentimentality"=>doubleval($req->sentimentality),
+            "relationshipScore"=>intval($req->relationshipScore),
+            "indyScore"=>intval($req->indyScore)
         );
         return $this->personalization(json_encode($json_q));
     }
@@ -191,9 +192,8 @@ class ThankfulController extends Controller
         return $artists_array;
     }
 
-    public function spotifyRecommend(Request $request){
+    public function spotifyRecommend(Array $data){
         $musicArray = array();
-        $data = $this->test_personalization();
         $artists = $data['artists_id'];
         $genres = $data['genre'];
 //        $genres = ["acoustic","afrobeat",
