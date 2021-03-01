@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Support\Facades\Log;
 use Spotify;
 use App\Models\Faculty;
@@ -171,19 +172,23 @@ class ThankfulController extends Controller
     }
 
     public function test_personalization(Request $request){
-        $req = $request->json()->all();
-        $json_q = array(
-            "favArtistName"=>$req['favArtistName'],
-            "emotion"=>$req['emotion'],
-            "personalizationGenre"=>$req['personalizationGenre'],
-            "temperatureOfHeartWarming"=>intval($req['temperatureOfHeartWarming']),
-            "drunkPerson"=>$req['drunkPerson'],
-            "sentimentality"=>doubleval($req['sentimentality']),
-            "relationshipScore"=>intval($req['relationshipScore']),
-            "indyScore"=>intval($req['indyScore'])
-        );
-        Log::debug(print_r($req,true));
-        return $this->personalization(json_encode($json_q));
+        try{
+            $req = $request->json()->all();
+            $json_q = array(
+                "favArtistName"=>$req['favArtistName'],
+                "emotion"=>$req['emotion'],
+                "personalizationGenre"=>$req['personalizationGenre'],
+                "temperatureOfHeartWarming"=>intval($req['temperatureOfHeartWarming']),
+                "drunkPerson"=>$req['drunkPerson'],
+                "sentimentality"=>doubleval($req['sentimentality']),
+                "relationshipScore"=>intval($req['relationshipScore']),
+                "indyScore"=>intval($req['indyScore'])
+            );
+            Log::debug(print_r($req,true));
+            return $this->personalization(json_encode($json_q));
+        }catch(Exception $e){
+            return response()->json(array("status"=>"error"));
+        }
     }
 
     public function getSpotifyArtistsID(Array $artists_name){
