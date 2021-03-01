@@ -17,10 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/',[LandingController::class,'index']);
 Route::get('/about',[LandingController::class,'about']);
 Route::get('/burden/insert',[LandingController::class,'burdenInsert']);
@@ -44,6 +40,7 @@ Route::post('/updateURL', function() {
 });
 Route::get('/clear-cache', function() {
     if(Auth::check()){
+        Artisan::call('route:cache');
         Artisan::call('config:cache');
         Artisan::call('cache:clear');
         return response()->json(array(
