@@ -1,7 +1,7 @@
 <template>
     <div>
         <fixed-header @change="updateFixedStatus" :threshold="propsData.threshold" :headerClass="propsData.headerClass" :fixedClass="propsData.fixedClass" :hideScrollUp="propsData.hideScrollUp">
-            <vk-navbar v-bind:style="{ backgroundColor: colorOfDay }" class="nav" >
+            <vk-navbar v-bind:style="{ backgroundColor: getColor() }" class="nav" >
                 <vk-navbar-logo slot="center">
                     <transition appear enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeIn" mode="in-out">
                         <div @click="variableshow = !variableshow">
@@ -12,8 +12,8 @@
                 <vk-navbar-item>
                     <vk-offcanvas-content>
                         <vk-offcanvas  overlay mode="reveal" :show.sync="variableshow">
-                            <vk-offcanvas-close @click="variableshow = false" v-bind:style="{ color: colorOfDay }" ></vk-offcanvas-close>
-                            <p v-bind:style="{ color: colorOfDay }" >
+                            <vk-offcanvas-close @click="variableshow = false" v-bind:style="{ color: getColor() }" ></vk-offcanvas-close>
+                            <p v-bind:style="{ color: getColor() }" >
                                 Hi ! I'm ARSANANDHA+
                             </p>
                         </vk-offcanvas>
@@ -42,7 +42,14 @@
         data: () => {
             return {
                 imgX: require('../../img/ATTTT-01.png'),
-                colorOfDay : "#004580",
+                colorOfDay : [
+                    "#dba73b",
+                    "#f27091",
+                    "#278766",
+                    "#f25821",
+                    "#5aaebd",
+                    "#695095",
+                    "#c9242b"],
                 fixedStatus: {
                     headerIsFixed: false
                 },
@@ -58,6 +65,9 @@
         methods:{
             updateFixedStatus(next) {
                 this.fixedStatus.headerIsFixed = next;
+            },
+            getColor(){
+                return this.colorOfDay[((new Date()).getDay())-1];
             }
         }
     }
