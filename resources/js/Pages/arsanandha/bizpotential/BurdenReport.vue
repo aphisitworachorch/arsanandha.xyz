@@ -9,14 +9,14 @@
                     <form>
                         <div class="uk-margin">
                             <label for="bizpotential_id">ชื่อย่อ สองหลัก</label>
-                            <input type="text" v-model="bizpotential_id" :maxlength="2" class="uk-input"
+                            <input type="text" :maxlength="2" class="uk-input"
                                    v-model="bizpotential_id"
                                    @input="bizpotential_id = $event.target.value.toUpperCase()"/>
                         </div>
                         <div class="uk-margin">
                             <label for="bizpotential_project">โปรเจกต์ที่รับผิดชอบ (ภาษาอังกฤษใน BSF.xyz)
                                 เท่านั้น</label>
-                            <input type="text" v-model="bizpotential_project" class="uk-input"
+                            <input type="text" class="uk-input"
                                    v-model="bizpotential_project"
                                    @input="bizpotential_project = $event.target.value.toUpperCase().split(' ').join('_')"/>
                         </div>
