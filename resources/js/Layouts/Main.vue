@@ -25,7 +25,7 @@
             <slot></slot>
         </div>
         <br/>
-        <footer style="text-align: center;">(C) Asanan Aphisitworachorch</footer>
+        <footer v-bind:style="{ color: getColor(),textAlign: 'center' }">(C) Asanan Aphisitworachorch</footer>
     </div>
 </template>
 
@@ -43,13 +43,13 @@
             return {
                 imgX: require('../../img/ATTTT-01.png'),
                 colorOfDay : [
+                    "#c9242b",
                     "#dba73b",
                     "#f27091",
                     "#278766",
                     "#f25821",
                     "#5aaebd",
-                    "#695095",
-                    "#c9242b"],
+                    "#695095"],
                 fixedStatus: {
                     headerIsFixed: false
                 },
@@ -67,7 +67,7 @@
                 this.fixedStatus.headerIsFixed = next;
             },
             getColor(){
-                return this.colorOfDay[((new Date()).getDay())-1];
+                return this.colorOfDay[((new Date()).getDay())];
             }
         }
     }
