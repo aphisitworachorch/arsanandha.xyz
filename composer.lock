@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a59e6e50490fe60256d7c41704f5d544",
+    "content-hash": "c49a52c88ef7f26ffab61f0eca3ac507",
     "packages": [
         {
             "name": "aerni/laravel-spotify",
@@ -2764,6 +2764,67 @@
                 "rfc4648"
             ],
             "time": "2020-12-06T15:14:20+00:00"
+        },
+        {
+            "name": "phattarachai/line-notify",
+            "version": "1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phattarachai/line-notify.git",
+                "reference": "2f8d718fe0dcc37e9b82bf36e7575a35946e3f0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phattarachai/line-notify/zipball/2f8d718fe0dcc37e9b82bf36e7575a35946e3f0d",
+                "reference": "2f8d718fe0dcc37e9b82bf36e7575a35946e3f0d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^7.2",
+                "illuminate/support": "^7.0|^8.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5",
+                "vlucas/phpdotenv": "^5.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Phattarachai\\LineNotify\\LineNotifyServiceProvider"
+                    ],
+                    "aliases": {
+                        "Line": "Phattarachai\\LineNotify\\Facade\\Line"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phattarachai\\LineNotify\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Phattarachai Chaimongkol",
+                    "email": "phatchai28@gmail.com"
+                }
+            ],
+            "description": "PHP and Laravel API for Line application notification.",
+            "homepage": "https://phattarachai.dev",
+            "keywords": [
+                "laravel",
+                "line",
+                "line-notify",
+                "phattarachai",
+                "php"
+            ],
+            "time": "2021-03-04T13:14:48+00:00"
         },
         {
             "name": "phpoption/phpoption",
