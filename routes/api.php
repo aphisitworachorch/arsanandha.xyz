@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ComfortableController;
+use App\Http\Controllers\MilitaryTimelineController;
 use App\Http\Controllers\ThankfulController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/spotifyRec',[ThankfulController::class,'spotifyRecommend']);
 Route::get('/testPersona',[ThankfulController::class,'test_personalization']);
+Route::get('/weather/{conditions}',[ComfortableController::class,'getWeatherByConditions']);
+Route::get('/military/timepack',[MilitaryTimelineController::class,'generateTimePacker']);

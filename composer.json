@@ -24,6 +24,7 @@
         "laravel/tinker": "^2.0",
         "mll-lab/laravel-graphql-playground": "^2.5",
         "nuwave/lighthouse": "^5.3",
+        "phattarachai/line-notify": "^1.1",
         "predis/predis": "^1.1",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
