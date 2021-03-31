@@ -187,7 +187,7 @@ class ThankfulController extends Controller
             Log::debug(print_r($req,true));
             return $this->personalization(json_encode($json_q));
         }catch(Exception $e){
-            return response()->json(array("status"=>"error"));
+            return response()->json(array("status"=>"error","message"=>$e->getMessage()));
         }
     }
 

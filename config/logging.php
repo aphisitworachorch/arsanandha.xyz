@@ -1,5 +1,7 @@
 <?php
 
+use App\Handler\LineNotifyLogHandler;
+use App\Logging\LineNotifyLogger;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
@@ -37,7 +39,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single','papertrail'],
+            'channels' => ['linenotify','single'],
             'ignore_exceptions' => false,
         ],
 
@@ -70,6 +72,13 @@ return [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
             ],
+        ],
+
+        'linenotify' => [
+            'driver'=>'custom',
+            'handler'=>LineNotifyLogHandler::class,
+            'via'=>LineNotifyLogger::class,
+            'level'=>'debug'
         ],
 
         'stderr' => [
