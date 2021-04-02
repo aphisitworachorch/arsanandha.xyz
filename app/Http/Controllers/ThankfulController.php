@@ -164,7 +164,6 @@ class ThankfulController extends Controller
             $valueMatrix['key'][1] = round(($valueMatrix['valence'][1]) * (10 - 7),1);
         }
         $valueMatrix['artists_id'] = $this->getSpotifyArtistsID($personal->favArtistName);
-        $valueMatrix['co_artists_id'] = $this->getSpotifyArtistsID($personal->favCoArtistName);
         $valueMatrix['genre'] = $personal->personalizationGenre;
         sort($valueMatrix['valence']);
         sort($valueMatrix['popularity']);
@@ -177,7 +176,6 @@ class ThankfulController extends Controller
             $req = $request->json()->all();
             $json_q = array(
                 "favArtistName"=>$req['favArtistName'],
-                "favCoArtistName"=>$req['favCoArtistName'],
                 "emotion"=>$req['emotion'],
                 "personalizationGenre"=>$req['personalizationGenre'],
                 "temperatureOfHeartWarming"=>intval($req['temperatureOfHeartWarming']),
@@ -186,7 +184,7 @@ class ThankfulController extends Controller
                 "relationshipScore"=>intval($req['relationshipScore']),
                 "indyScore"=>intval($req['indyScore'])
             );
-//            Log::debug(print_r($req,true));
+            Log::debug(print_r($req,true));
             return $this->personalization(json_encode($json_q));
         }catch(Exception $e){
             return response()->json(array("status"=>"error","message"=>$e->getMessage()));
@@ -201,102 +199,28 @@ class ThankfulController extends Controller
         return $artists_array;
     }
 
-    public function getSpotifyArtistsIDString($search_artist){
-        return Spotify::searchItems($search_artist, 'artist')->get()['artists']['items'][0]['id'];
-    }
-
-    public function spotifyMutation(Array $data,$is_target,$genres,$artists){
-        $valenceMutate[0] = $data['valence'][0];
-        $valenceMutate[1] = $data['valence'][1];
-        $tempoMutate[0] = $data['tempo'][0];
-        $tempoMutate[1] = $data['tempo'][1];
-        $keyMutate[0] = $data['key'][0];
-        $keyMutate[1] = $data['key'][1];
-        $popularMutate[0] = $data['popularity'][0];
-        $popularMutate[1] = $data['popularity'][1];
-        if(!$is_target){
-            $valenceMutate[0] = $data['valence'][0] - mt_rand(0.1,0.3);
-            $valenceMutate[1] = $data['valence'][1] + mt_rand(0.4,0.7);
-            $tempoMutate[0] = $data['tempo'][0] - mt_rand(16,30);
-            $tempoMutate[1] = $data['tempo'][1] + mt_rand(26,40);
-            $keyMutate[0] = $data['key'][0] - 1;
-            $keyMutate[1] = $data['key'][1] + 3;
-            $popularMutate[0] = $data['popularity'][0] - mt_rand(10,17);
-            $popularMutate[1] = $data['popularity'][1] + mt_rand(27,30);
-        }
-        $seed = SpotifySeed::setGenres($genres)
-            ->setArtists($artists)
-            ->setValence($valenceMutate[0],$valenceMutate[1])
-            ->setTempo($tempoMutate[0],$tempoMutate[1])
-            ->setTargetKey($keyMutate[0],$keyMutate[1])
-            ->setPopularity($popularMutate[0],$popularMutate[1]);
-        return Spotify::recommendations($seed)->market('TH')->get();
-    }
-
     public function spotifyRecommend(Array $data){
-        $point = array(
-            "source"=>0,
-            "destination"=>100
-        );
-        $artistLister = array();
         $musicArray = array();
         $artists = $data['artists_id'];
-        $co_artist = $data['co_artists_id'];
         $genres = $data['genre'];
-        $tiredness = 0;
-        $is_target = false;
-        foreach($artists as $at){
-            $artistLister[$at]["counter"] = 0;
-        }
-        foreach($co_artist as $ct){
-            $artistLister[$ct]["counter"] = 0;
-        }
-        while(($point['source'] <= ($point['destination'] - 10))){
-            if($point['source'] <= 0){
-                $point['source'] = 5;
-            }
-            if($point['source'] >= 100){
-                $point['source'] = mt_rand(mt_rand(20,30),mt_rand(40,80));
-            }
-            if($tiredness > 100){
-                break;
-            }
-            $music_api_get = $this->spotifyMutation($data,$is_target,$genres,$artists);
-            $explicit = false;
-            foreach($music_api_get['tracks'] as $tracks_body => $key){
+        $seed = SpotifySeed::setGenres($genres)
+            ->setArtists($artists)
+            ->setValence($data['valence'][0],$data['valence'][1])
+            ->setTempo($data['tempo'][0],$data['tempo'][1])
+            ->setTargetKey($data['key'][0],$data['key'][1])
+            ->setPopularity($data['popularity'][0],$data['popularity'][1]);
+        $music_api_get = Spotify::recommendations($seed)->market('TH')->get();
+        $explicit = false;
+        foreach($music_api_get['tracks'] as $tracks_body => $key){
 //            if($music_api_get['tracks'][$tracks_body]['explicit'] === $explicit){
-                if(in_array($this->getSpotifyArtistsIDString($music_api_get['tracks'][$tracks_body]['artists'][0]['name']),$artists) || in_array($this->getSpotifyArtistsIDString($music_api_get['tracks'][$tracks_body]['artists'][0]['name']),$co_artist)){
-                    $point['source'] += 10;
-                    if($artistLister[$this->getSpotifyArtistsIDString($music_api_get['tracks'][$tracks_body]['artists'][0]['name'])]['counter'] < 2){
-                        $musicArray[$music_api_get['tracks'][$tracks_body]['uri']]['music']['artists'] = $music_api_get['tracks'][$tracks_body]['artists'][0]['name'];
-                        $musicArray[$music_api_get['tracks'][$tracks_body]['uri']]['music']['name'] = $music_api_get['tracks'][$tracks_body]['name'];
-                        $musicArray[$music_api_get['tracks'][$tracks_body]['uri']]['music']['urls'] = $music_api_get['tracks'][$tracks_body]['external_urls']['spotify'];
-                        $musicArray[$music_api_get['tracks'][$tracks_body]['uri']]['music']['pictures'] = $music_api_get['tracks'][$tracks_body]['album']['images'];
-                        $musicArray[$music_api_get['tracks'][$tracks_body]['uri']]['music']['popularity'] = $music_api_get['tracks'][$tracks_body]['popularity'];
-                        $musicArray[$music_api_get['tracks'][$tracks_body]['uri']]['music']['analytics'] = Spotify::audioFeaturesForTrack($music_api_get['tracks'][$tracks_body]['id'])->get();
-                        $tiredness -= 1;
-                    }
-                    $artistLister[$this->getSpotifyArtistsIDString($music_api_get['tracks'][$tracks_body]['artists'][0]['name'])]['counter'] += 1;
-                }else{
-                    $point['source'] -= 1;
-                }
+                $musicArray[$music_api_get['tracks'][$tracks_body]['uri']]['music']['artists'] = $music_api_get['tracks'][$tracks_body]['artists'][0]['name'];
+                $musicArray[$music_api_get['tracks'][$tracks_body]['uri']]['music']['name'] = $music_api_get['tracks'][$tracks_body]['name'];
+                $musicArray[$music_api_get['tracks'][$tracks_body]['uri']]['music']['urls'] = $music_api_get['tracks'][$tracks_body]['external_urls']['spotify'];
+                $musicArray[$music_api_get['tracks'][$tracks_body]['uri']]['music']['pictures'] = $music_api_get['tracks'][$tracks_body]['album']['images'];
+                $musicArray[$music_api_get['tracks'][$tracks_body]['uri']]['music']['popularity'] = $music_api_get['tracks'][$tracks_body]['popularity'];
+                $musicArray[$music_api_get['tracks'][$tracks_body]['uri']]['music']['analytics'] = Spotify::audioFeaturesForTrack($music_api_get['tracks'][$tracks_body]['id'])->get();
 //            }
-            }
-            if($point['source'] <= 90){
-                $is_target = false;
-            }
-            $tiredness++;
         }
-//        return response()->json(
-//            array(
-//                "point"=>array(
-//                    "target_c"=>$point,
-//                    "tiredness"=>$tiredness,
-//                    "artlister"=>$artistLister
-//                ),
-//                "music"=>$musicArray
-//            )
-//        );
         return $musicArray;
     }
 }
