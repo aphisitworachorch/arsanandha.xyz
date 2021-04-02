@@ -8,6 +8,7 @@
                 <img :src="imgX" v-bind:style="{ width: '50%'}"/>
                 <h3 style="text-align: left">" {{ verse }} "</h3>
                 <p style="text-align: left">{{ references }}</p>
+                <img :src="unsplash" v-bind:style="{ width: '20%'}"/>
                 <p style="text-align: left">Photo by : (C) {{ infoUnsplash }} / UNSPLASH : {{ infoUnsplashUsername }}</p>
             </div>
         </div>
@@ -20,7 +21,8 @@ export default {
     props:['photolink','verse','references','infoUnsplash','infoUnsplashUsername'],
     data: () => {
         return {
-            imgX: require('../../../../img/ARSANANDHA-AE-LOGO-02.png')
+            imgX: require('../../../../img/ARSANANDHA-AE-LOGO-02.png'),
+            unsplash: require('../../../../img/Unsplash_Logo_Full-02.png')
         }
     }
 }
