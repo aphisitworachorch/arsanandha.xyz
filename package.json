@@ -55,6 +55,7 @@
         "vue-head": "^2.2.0",
         "vue-kinesis": "^1.2.3",
         "vue-meta": "^2.4.0",
+        "vue-mobile-detection": "^1.0.0",
         "vue-moment": "^4.1.0",
         "vue-router": "^3.4.9",
         "vue-select2": "^0.2.6",

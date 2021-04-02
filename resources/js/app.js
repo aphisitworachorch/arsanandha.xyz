@@ -18,8 +18,11 @@ import PortalVue from 'portal-vue';
 import VAnimateCss from 'v-animate-css';
 import DataTable from 'laravel-vue-datatable';
 import VueKinesis from 'vue-kinesis'
+import VueMobileDetection from "vue-mobile-detection";
+
 es6Promise.polyfill()
 
+Vue.use(VueMobileDetection);
 Vue.use(InertiaApp);
 Vue.use(VueKinesis);
 Vue.use(InertiaForm);

@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         JamesDordoy\LaravelVueDatatable\Providers\LaravelVueDatatableServiceProvider::class,
+        MarkSitko\LaravelUnsplash\UnsplashServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -231,6 +232,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Unsplash' => MarkSitko\LaravelUnsplash\UnsplashFacade::class,
+
     ],
 
 ];
