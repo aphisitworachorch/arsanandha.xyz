@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Validation\Rules\In;
 use Inertia\Inertia;
+use Jenssegers\Agent\Agent;
 use MarkSitko\LaravelUnsplash\UnsplashFacade;
 
 class LandingController extends Controller
@@ -18,13 +19,25 @@ class LandingController extends Controller
             ->count(1)
             ->toJson();
 
-        return Inertia::render('Index/IndexT',[
-            'verse'=>BibleVerseController::bible()['verse']['details']['text'],
-            'references'=>BibleVerseController::bible()['verse']['details']['reference'],
-            'photoLink'=>$photo[0]->urls->regular,
-            'infoUnsplash'=>$photo[0]->user->name,
-            'infoUnsplashUsername'=>$photo[0]->user->username
-        ]);
+        $agent = new Agent();
+        if($agent->isMobile() || $agent->isTablet() || $agent->isGenericPhone() || $agent->isGenericTablet()){
+            return Inertia::render('Index/IndexTMobile',[
+                'verse'=>BibleVerseController::bible()['verse']['details']['text'],
+                'references'=>BibleVerseController::bible()['verse']['details']['reference'],
+                'photoLink'=>$photo[0]->urls->regular,
+                'infoUnsplash'=>$photo[0]->user->name,
+                'infoUnsplashUsername'=>$photo[0]->user->username
+            ]);
+        }else{
+            return Inertia::render('Index/IndexT',[
+                'verse'=>BibleVerseController::bible()['verse']['details']['text'],
+                'references'=>BibleVerseController::bible()['verse']['details']['reference'],
+                'photoLink'=>$photo[0]->urls->regular,
+                'infoUnsplash'=>$photo[0]->user->name,
+                'infoUnsplashUsername'=>$photo[0]->user->username
+            ]);
+        }
+
     }
 
     public function about(){
