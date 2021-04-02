@@ -11,7 +11,7 @@
                                      v-bind:infoUnsplashUsername="infoUnsplashUsername"
                                      v-bind:references="references"
                                      ></PhotoMobile>
-                        <Photo
+                        <Photo v-if="!$isMobile()"
                                v-bind:photolink="photoLink"
                                v-bind:verse="verse"
                                v-bind:infoUnsplash="infoUnsplash"
