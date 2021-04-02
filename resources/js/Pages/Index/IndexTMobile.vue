@@ -4,12 +4,13 @@
             <div class="uk-container uk-padding-large uk-text-center">
                 <div class="container">
                     <vk-card>
-                        <Photo v-if="!$isMobile()"
-                               v-bind:photolink="photoLink"
-                               v-bind:verse="verse"
-                               v-bind:infoUnsplash="infoUnsplash"
-                               v-bind:infoUnsplashUsername="infoUnsplashUsername"
-                               v-bind:references="references"></Photo>
+                        <PhotoMobile v-if="$isMobile()"
+                                     v-bind:photolink="photoLink"
+                                     v-bind:verse="verse"
+                                     v-bind:infoUnsplash="infoUnsplash"
+                                     v-bind:infoUnsplashUsername="infoUnsplashUsername"
+                                     v-bind:references="references"
+                                     ></PhotoMobile>
                     </vk-card>
                 </div>
             </div>
@@ -22,7 +23,7 @@ import AppLayout from "../../Layouts/Main";
 import Photo from "../arsanandha/photolayout/Photo";
 import PhotoMobile from "../arsanandha/photolayout/PhotoMobile";
     export default {
-        name: "IndexT",
+        name: "IndexTMobile",
         metaInfo:{
             title:"ARSANANDHA"
         },
