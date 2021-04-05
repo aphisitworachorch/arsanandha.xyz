@@ -59,10 +59,10 @@ class MilitaryTimelineController extends Controller
                 ->count(1)
                 ->toJson();
             /** DOCS https://phattarachai.dev/line-notify-laravel-php */
-            Line::imageUrl($photo[0]->urls->regular)
-            ->send('เหลืออีก '.$remainDay.' วัน สำหรับการเข้ารับราชการทหาร ของโต้');
             Line::send('ช่วงเวลาการเข้ารับราชการทหารของโต้ ตั้งแต่วันที่ '.self::simpleDateFormat($start).' ถึง '.self::simpleDateFormat($end));
             Line::send('ช่วงเวลาการฝึกทหารของโต้ ตั้งแต่วันที่ '.self::simpleDateFormat($start).' ถึง '.self::simpleDateFormat($practicePeriod). ' ซึ่งเป็นระยะเวลา '.$remainPracticeMonths. ' เดือน');
+            Line::imageUrl($photo[0]->urls->regular)
+            ->send('เหลืออีก '.$remainDay.' วัน สำหรับการเข้ารับราชการทหาร ของโต้');
         }
 
         return $period;
