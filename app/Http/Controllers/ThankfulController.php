@@ -16,13 +16,15 @@ use SpotifySeed;
 
 class ThankfulController extends Controller
 {
-    public function index(){
+    public function index():\Inertia\Response
+    {
         return Inertia::render('arsanandha/invitation/ThanksCard',[
             'options'=>$this->getFaculty()
         ]);
     }
 
-    public function getFaculty(){
+    public function getFaculty():array
+    {
         $faculty = Faculty::all();
         $choice = [];
         foreach($faculty as $fc){
@@ -31,7 +33,8 @@ class ThankfulController extends Controller
         return $choice;
     }
 
-    public function person(Request $request){
+    public function person(Request $request):\Illuminate\Http\JsonResponse|\Inertia\Response
+    {
         if($request->card_id){
             Thankful::where('url_id',$request->card_id)
                 ->update(['received'=>'y']);
@@ -44,7 +47,8 @@ class ThankfulController extends Controller
         }
     }
 
-    public function thankful(Request $request){
+    public function thankful(Request $request):\Inertia\Response
+    {
         if(Thankful::create($request->all())){
             return Inertia::render('arsanandha/invitation/ThanksEnd',[
                 'last_number'=>Thankful::all()->count()
@@ -52,7 +56,8 @@ class ThankfulController extends Controller
         }
     }
 
-    public function search(Request $request){
+    public function search(Request $request):\Inertia\Response
+    {
         if(Auth::check()){
             return Inertia::render('arsanandha/invitation/view/ThanksCardTable');
         }else{
@@ -60,7 +65,8 @@ class ThankfulController extends Controller
         }
     }
 
-    public function viewByURLID(Request $request){
+    public function viewByURLID(Request $request):\Illuminate\Http\JsonResponse
+    {
         if($request->card_id){
             return response()->json(Thankful::with('haveFaculty')->where("url_id",$request->card_id)->get());
         }
@@ -78,7 +84,8 @@ class ThankfulController extends Controller
         return new DataTableCollectionResource($data);
     }
 
-    public function ajaxInsert(Request $request){
+    public function ajaxInsert(Request $request):\Illuminate\Http\JsonResponse
+    {
         if($request->ajax()){
             if(Auth::check()){
                 if($request->id && $request->in_mind && $request->received){

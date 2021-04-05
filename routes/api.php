@@ -22,8 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/spotifyRec',[ThankfulController::class,'spotifyRecommend']);
 Route::get('/testPersona',[ThankfulController::class,'test_personalization']);
-Route::get('/weather/{conditions}',[ComfortableController::class,'getWeatherByConditions']);
-Route::get('/military/timepack/{action}',[MilitaryTimelineController::class,'generateTimePacker']);
+Route::get('/weather/{conditions?}',[ComfortableController::class,'getWeatherByConditions']);
+Route::get('/military/timepack/{action?}',[MilitaryTimelineController::class,'generateTimePacker']);
+Route::get('/thankful/card/{card_id?}',[ThankfulController::class,'viewByURLID']);
 Route::get('/randPhoto',function(){
     return Unsplash::randomPhoto()
         ->orientation('landscape')
