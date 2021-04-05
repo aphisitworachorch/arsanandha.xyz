@@ -6,13 +6,17 @@ use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
+use JetBrains\PhpStorm\ArrayShape;
 use MarkSitko\LaravelUnsplash\UnsplashFacade;
 use Phattarachai\LineNotify\Facade\Line;
 
 class MilitaryTimelineController extends Controller
 {
-    /** DOCS https://dev.classmethod.jp/articles/changetime-with-helpers/ */
-    public static function simpleDateFormat($arg)
+    /** DOCS https://dev.classmethod.jp/articles/changetime-with-helpers/
+     * @param $arg
+     * @return string
+     */
+    public static function simpleDateFormat($arg):string
     {
         $thai_months = [
             1 => 'ม.ค.',
@@ -34,7 +38,8 @@ class MilitaryTimelineController extends Controller
         return $date->format("j $month $year");
     }
 
-    public function generateTimePacker(Request $request){
+    public function generateTimePacker(Request $request):bool
+    {
         $start = Carbon::create(2021,5,1);
         $end = Carbon::create(2021,5,1)->addMonths(6);
         $practicePeriod = Carbon::create(2021,5,1)->addWeeks(10);
@@ -65,6 +70,28 @@ class MilitaryTimelineController extends Controller
             ->send('เหลืออีก '.$remainDay.' วัน สำหรับการเข้ารับราชการทหาร ของโต้');
         }
 
-        return $period;
+        return true;
+    }
+
+    /** PHP 8 Function */
+    #[ArrayShape(["remainPracticeMonths" => "float|int|string", "remainDay" => "int"])]
+    public function getRemainingTime():array
+    {
+        $start = Carbon::create(2021,5,1);
+        $end = Carbon::create(2021,5,1)->addMonths(6);
+        $practicePeriod = Carbon::create(Carbon::now()->toDateString())->addWeeks(10);
+
+        $remainDay = Carbon::now()->diffInDays($start,false);
+
+        if(Carbon::today()->lessThan($start)){
+            $remainPracticeMonths = "NOT_IN_TIME";
+        }else{
+            $remainPracticeMonths = $start->diffInDays($practicePeriod);
+        }
+
+        return array(
+            "remainPracticeMonths"=>$remainPracticeMonths,
+            "remainDay"=>$remainDay
+        );
     }
 }

@@ -3,6 +3,12 @@
         <div>
             <div class="uk-container uk-padding-large uk-text-center">
                 <div class="container">
+                    <vk-card :style="{ backgroundImage: `url(${this.img}), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5))`,backgroundRepeat: 'no-repeat',backgroundAttachment: 'fixed',backgroundPosition: 'center' }" @click="window.location.replace = 'https://military.arsanandha.xyz'">
+                        <DateSlotT v-bind:remainDate="remainDay" v-bind:remainPractice="remainPractices" v-bind:color="colorist">
+
+                        </DateSlotT>
+                    </vk-card>
+                    <br/>
                     <vk-card>
                         <PhotoMobile v-if="$isMobile()"
                                      v-bind:photolink="photoLink"
@@ -22,18 +28,22 @@
 import AppLayout from "../../Layouts/Main";
 import Photo from "../arsanandha/photolayout/Photo";
 import PhotoMobile from "../arsanandha/photolayout/PhotoMobile";
+import DateSlotT from "../arsanandha/countdate/DateSlotT";
     export default {
         name: "IndexTMobile",
         metaInfo:{
             title:"ARSANANDHA"
         },
-        props:['verse','references','photoLink','infoUnsplashUsername','infoUnsplash'],
+        props:['verse','references','photoLink','infoUnsplashUsername','infoUnsplash','remainDay','remainPractices'],
         data: () => {
             return{
-                myself: "https://avatars.githubusercontent.com/aphisitworachorch"
+                myself: "https://avatars.githubusercontent.com/aphisitworachorch",
+                img: require('../../../img/conscript.jpg'),
+                colorist: 'white'
             }
         },
         components:{
+            DateSlotT,
             PhotoMobile,
             Photo,
             AppLayout

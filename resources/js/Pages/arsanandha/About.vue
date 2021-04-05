@@ -189,7 +189,7 @@ let workExperienceData = {
     },
     memessage: {
         start: moment(new Date(2020, 10, 17, 9, 0, 0)),
-        end: moment(new Date())
+        end: moment(new Date(2020,4,1,9,0,0))
     }
 }
 let workExperienceDataDiff = {

@@ -4,28 +4,28 @@
             <vk-navbar v-bind:style="{ backgroundColor: getColor() }" class="nav" >
                 <vk-navbar-logo slot="center">
                     <transition appear enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeIn" mode="in-out">
-                        <div @click="variableshow = !variableshow">
+<!--                        <div @click="variableshow = !variableshow">-->
+                        <div>
                             <img v-if="show" :src="imgX" alt="ARSANANDHA" v-bind:style="{ height: '80px'}"/>
                         </div>
                     </transition>
                 </vk-navbar-logo>
-                <vk-navbar-item>
-                    <vk-offcanvas-content>
-                        <vk-offcanvas  overlay mode="reveal" :show.sync="variableshow">
-                            <vk-offcanvas-close @click="variableshow = false" v-bind:style="{ color: getColor() }" ></vk-offcanvas-close>
-                            <p v-bind:style="{ color: getColor() }" >
-                                Hi ! I'm ARSANANDHA+
-                            </p>
-                        </vk-offcanvas>
-                    </vk-offcanvas-content>
-                </vk-navbar-item>
+<!--                <vk-navbar-item>-->
+<!--                    <vk-offcanvas-content>-->
+<!--                        <vk-offcanvas  overlay mode="reveal" :show.sync="variableshow">-->
+<!--                            <vk-offcanvas-close @click="variableshow = false" v-bind:style="{ color: getColor() }" ></vk-offcanvas-close>-->
+<!--                            <p v-bind:style="{ color: getColor() }" >-->
+<!--                                Hi ! I'm ARSANANDHA+-->
+<!--                            </p>-->
+<!--                        </vk-offcanvas>-->
+<!--                    </vk-offcanvas-content>-->
+<!--                </vk-navbar-item>-->
             </vk-navbar>
         </fixed-header>
         <div class="uk-container" v-bind:class="{ headerIsFixed: fixedStatus.headerIsFixed }">
             <slot></slot>
         </div>
         <br/>
-        <footer v-bind:style="{ color: getColor(),textAlign: 'center' }">(C) Asanan Aphisitworachorch</footer>
     </div>
 </template>
 
