@@ -3,7 +3,7 @@
         <div>
             <div class="uk-container uk-padding-large uk-text-center">
                 <div class="container">
-                    <vk-card :style="{ backgroundImage: `url(${this.img}), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5))`,backgroundRepeat: 'no-repeat',backgroundAttachment: 'fixed',backgroundPosition: 'center' }" @click="window.location.replace = 'https://military.arsanandha.xyz'">
+                    <vk-card :style="{ backgroundImage: `url(${this.img}), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5))`,backgroundRepeat: 'no-repeat',backgroundAttachment: 'fixed',backgroundPosition: 'center' }">
                         <DateSlotT v-bind:remainDate="remainDay" v-bind:remainPractice="remainPractices" v-bind:color="colorist">
 
                         </DateSlotT>

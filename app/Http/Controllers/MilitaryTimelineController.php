@@ -79,7 +79,7 @@ class MilitaryTimelineController extends Controller
     {
         $start = Carbon::create(2021,5,1);
         $end = Carbon::create(2021,5,1)->addMonths(6);
-        $practicePeriod = Carbon::create(Carbon::now()->toDateString())->addWeeks(10);
+        $practicePeriod = Carbon::create(Carbon::now()->toDateString())->addWeeks(13);
 
         $remainDay = Carbon::now()->diffInDays($start,false);
 

@@ -21,14 +21,15 @@ Route::get('/',[LandingController::class,'index']);
 Route::get('/about',[LandingController::class,'about']);
 Route::get('/burden/insert',[LandingController::class,'burdenInsert']);
 Route::get('/grad2020',[LandingController::class,'graduation']);
-Route::get('/thankful',[ThankfulController::class,'index']);
-Route::get('/thankful/card/{card_id?}',[ThankfulController::class,'person']);
-Route::get('/api/thankful/card/{card_id?}',[ThankfulController::class,'viewByURLID']);
-Route::post('/thankful',[ThankfulController::class,'thankful']);
+Route::group(['prefix'=>'thankful','as'=>'thankful.'],function(){
+    Route::get('/',[ThankfulController::class,'index']);
+    Route::post('/',[ThankfulController::class,'thankful']);
+    Route::get('/card/{card_id?}',[ThankfulController::class,'person']);
+    Route::get('/view',[ThankfulController::class,'search']);
+    Route::get('/view/ajax',[ThankfulController::class,'ajaxView']);
+    Route::post('/view/insert',[ThankfulController::class,'ajaxInsert']);
+});
 Route::get('/extracurriculars/{activity?}',[LandingController::class,'extracurriculars']);
-Route::get('/thankful/view',[ThankfulController::class,'search']);
-Route::get('/thankful/view/ajax',[ThankfulController::class,'ajaxView']);
-Route::post('/thankful/view/insert',[ThankfulController::class,'ajaxInsert']);
 Route::post('/updateURL', function() {
     if(Auth::check()){
         $msg = Artisan::call('arsanandha:genurlid');
