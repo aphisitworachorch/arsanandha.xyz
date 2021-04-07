@@ -14,7 +14,9 @@ class CreateMilitaryEnlistTable extends Migration
     public function up()
     {
         Schema::create('military_enlist', function (Blueprint $table) {
-            $table->id();
+            $table->id('military_id')->autoIncrement();
+            $table->string('type',20);
+            $table->json('info')->nullable();
             $table->timestamps();
         });
     }

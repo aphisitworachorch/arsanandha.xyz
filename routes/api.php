@@ -25,6 +25,7 @@ Route::get('/testPersona',[ThankfulController::class,'test_personalization']);
 Route::get('/weather/{conditions?}',[ComfortableController::class,'getWeatherByConditions']);
 Route::get('/military/timepack/{action?}',[MilitaryTimelineController::class,'generateTimePacker']);
 Route::get('/thankful/card/{card_id?}',[ThankfulController::class,'viewByURLID']);
+Route::post('/beaconForm',[MilitaryTimelineController::class,'beaconForm']);
 Route::get('/randPhoto',function(){
     return Unsplash::randomPhoto()
         ->orientation('landscape')
