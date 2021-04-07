@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MilitaryEnlist;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Carbon\CarbonPeriod;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use JetBrains\PhpStorm\ArrayShape;
 use MarkSitko\LaravelUnsplash\UnsplashFacade;
@@ -93,5 +95,108 @@ class MilitaryTimelineController extends Controller
             "remainPracticeMonths"=>$remainPracticeMonths,
             "remainDay"=>$remainDay
         );
+    }
+
+    /**
+     *  API Usage
+     *  ----- METHOD [POST] -----
+     *  type -> [round_save is first round checking]
+     *  type -> [note is note about military story]
+     *  type -> [event is note about event and firing to LINE Notify]
+     *  textNote -> [is content]
+     *  dataType -> [default is ios_note or postman_note]
+     *  valueJSON -> [array value]
+     *  activeJSON -> [true is active / false is inactive]
+     *  round -> [round note 1 is round 1 2 is round 2]
+     *  @param Request $request
+     *  @return JsonResponse
+     */
+    public function beaconForm(Request $request):JsonResponse
+    {
+        $round = array(
+            1=>array(
+                "start_month"=>[2021,5,1],
+                "duration_month"=>6
+            ),
+            2=>array(
+                "start_month"=>[2021,11,1],
+                "duration_month"=>6
+            )
+        );
+        if(array_key_exists(intval($request->round),$round)){
+            if($request->type == "round_save"){
+                $request->valueJSON = $round;
+                $MIL = MilitaryEnlist::create(
+                    array(
+                        "type"=>$request->type,
+                        "info"=>MilitaryEnlist::MILJSON($request)
+                    )
+                );
+                if($MIL->military_id){
+                    return response()->json(
+                        array(
+                            "status"=>"completed"
+                        )
+                    );
+                }else{
+                    return response()->json(
+                        array(
+                            "status"=>"fail"
+                        )
+                    );
+                }
+            }
+        }else{
+            if($request->type == "note"){
+                $request->valueJSON = array(
+                    "text"=>$request->textNote
+                );
+                $MIL = MilitaryEnlist::create(
+                    array(
+                        "type"=>$request->type,
+                        "info"=>MilitaryEnlist::MILJSON($request)
+                    )
+                );
+                if($MIL->military_id){
+                    return response()->json(
+                        array(
+                            "status"=>"completed"
+                        )
+                    );
+                }else{
+                    return response()->json(
+                        array(
+                            "status"=>"fail"
+                        )
+                    );
+                }
+            }else if($request->type == "event"){
+                $request->valueJSON = array(
+                    "text"=>$request->textNote
+                );
+                $MIL = MilitaryEnlist::create(
+                    array(
+                        "type"=>$request->type,
+                        "info"=>MilitaryEnlist::MILJSON($request)
+                    )
+                );
+                if($MIL->military_id){
+                    Line::send('จดหมายจากโต้ : '.$request->textNote);
+                    return response()->json(
+                        array(
+                            "status"=>"completed"
+                        )
+                    );
+                }else{
+                    return response()->json(
+                        array(
+                            "status"=>"fail"
+                        )
+                    );
+                }
+            }
+
+        }
+
     }
 }
