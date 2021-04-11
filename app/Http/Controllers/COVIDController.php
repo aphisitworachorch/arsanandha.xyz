@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\CovidToday;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Phattarachai\LineNotify\Facade\Line;
+use Phattarachai\LineNotify\Line;
 
 class COVIDController extends Controller
 {
     public static function covidHeartBeat(){
         $data = Http::get('https://covid19.th-stat.com/api/open/today')->json();
-        Line::send("ผู้ป่วยโควิด ณ วันนี้ : ".$data['NewConfirmed']);
+        $lineNotify = new Line(env('LINE_NOTIFY_LOGGER_ACCESS_TOKEN'));
+        $lineNotify->send("ผู้ป่วยโควิด ณ ตอนนี้ " . $data['NewConfirmed']);
         $data = CovidToday::create(
             array(
                 "total_covid"=>$data['Confirmed'],
