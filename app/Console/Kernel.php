@@ -27,9 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->call(function(){
-            return COVIDController::covidHeartBeat();
-        })->hourly();
+        $schedule->command('covid:collect')->hourly();
     }
 
     /**
