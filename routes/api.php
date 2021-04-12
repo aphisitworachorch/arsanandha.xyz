@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ComfortableController;
+use App\Http\Controllers\COVIDController;
 use App\Http\Controllers\MilitaryTimelineController;
 use App\Http\Controllers\ThankfulController;
 use Illuminate\Http\Request;
@@ -33,3 +34,4 @@ Route::get('/randPhoto',function(){
         ->count(1)
         ->toJson();
 });
+Route::get('/covid19/today',[COVIDController::class,'covidHeartBeat']);

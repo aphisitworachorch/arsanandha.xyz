@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\CovidCaller'
+//        'App\Console\Commands\CovidCaller'
     ];
 
     /**
@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('covid:collect')->hourly()->withoutOverlapping();
+//        $schedule->command('covid:collect')->hourly()->withoutOverlapping();
     }
 
     /**
