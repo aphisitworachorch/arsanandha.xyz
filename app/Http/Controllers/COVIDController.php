@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CovidToday;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Phattarachai\LineNotify\Line;
