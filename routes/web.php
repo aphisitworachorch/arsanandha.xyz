@@ -41,8 +41,8 @@ Route::post('/updateURL', function() {
 });
 Route::get('/clear-cache', function() {
     if(Auth::check()){
-        Artisan::call('route:cache');
-        Artisan::call('config:cache');
+        Artisan::call('route:clear');
+        Artisan::call('config:clear');
         Artisan::call('cache:clear');
         return response()->json(array(
            "status"=>"cache_cleared",

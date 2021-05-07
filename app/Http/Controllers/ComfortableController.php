@@ -43,51 +43,52 @@ class ComfortableController extends Controller
 
     public function getHourly(){
         $calculated = [];
-        foreach($this->getWeather()['hourly']['data'] as $key => $curr){
+        collect ($this->getWeather ()['hourly']['data'])->each (function ($curr, $key) use ($epoch, $calculated) {
             $epoch = $curr['time'];
-            $calculated[$key]['time'] = (new DateTime("@$epoch"))->setTimeZone($this->timezone)->format('Y-m-d H:i:s');
-            $calculated[$key]['temperature'] = array(
-                "actual_temp"=>$curr['temperature'],
-                "feel_like_temp"=>$curr['apparentTemperature']
+            $calculated[$key]['time'] = (new DateTime("@$epoch"))->setTimeZone ($this->timezone)->format ('Y-m-d H:i:s');
+            $calculated[$key]['temperature'] = array (
+                "actual_temp" => $curr['temperature'],
+                "feel_like_temp" => $curr['apparentTemperature']
             );
-            $calculated[$key]['humidity'] = (doubleval($curr['humidity'])) * 100;
-            $calculated[$key]['uv'] = (doubleval($curr['uvIndex']));
-        }
+            $calculated[$key]['humidity'] = (doubleval ($curr['humidity'])) * 100;
+            $calculated[$key]['uv'] = (doubleval ($curr['uvIndex']));
+        });
         return $calculated;
     }
 
     public function getDaily(){
         $calculated = [];
-        foreach($this->getWeather()['daily']['data'] as $key => $curr){
+        collect ($this->getWeather ()['daily']['data'])->each (function ($curr, $key) use ($epoch, $calculated, $epochHigh, $epochLow, $epochFeelLikeHigh, $epochFeelLikeLow, $epochUV) {
             $epoch = $curr['time'];
-            $calculated[$key]['time'] = (new DateTime("@$epoch"))->setTimeZone($this->timezone)->format('Y-m-d H:i:s');
+            $calculated[$key]['time'] = (new DateTime("@$epoch"))->setTimeZone ($this->timezone)->format ('Y-m-d H:i:s');
             $epochHigh = $curr['temperatureHighTime'];
             $epochLow = $curr['temperatureLowTime'];
-            $calculated[$key]['temperatureActual'] = array(
-                "high"=>$curr['temperatureHigh'],
-                "high_at"=>(new DateTime("@$epochHigh"))->format('Y-m-d H:i:s'),
-                "low"=>$curr['temperatureLow'],
-                "low_at"=>(new DateTime("@$epochLow"))->format('Y-m-d H:i:s')
+            $calculated[$key]['temperatureActual'] = array (
+                "high" => $curr['temperatureHigh'],
+                "high_at" => (new DateTime("@$epochHigh"))->format ('Y-m-d H:i:s'),
+                "low" => $curr['temperatureLow'],
+                "low_at" => (new DateTime("@$epochLow"))->format ('Y-m-d H:i:s')
             );
             $epochFeelLikeHigh = $curr['apparentTemperatureHighTime'];
             $epochFeelLikeLow = $curr['apparentTemperatureLowTime'];
-            $calculated[$key]['temperatureFeelLike'] = array(
-                "high"=>$curr['apparentTemperatureHigh'],
-                "high_at"=>(new DateTime("@$epochFeelLikeHigh"))->format('Y-m-d H:i:s'),
-                "low"=>$curr['apparentTemperatureLow'],
-                "low_at"=>(new DateTime("@$epochFeelLikeLow"))->format('Y-m-d H:i:s')
+            $calculated[$key]['temperatureFeelLike'] = array (
+                "high" => $curr['apparentTemperatureHigh'],
+                "high_at" => (new DateTime("@$epochFeelLikeHigh"))->format ('Y-m-d H:i:s'),
+                "low" => $curr['apparentTemperatureLow'],
+                "low_at" => (new DateTime("@$epochFeelLikeLow"))->format ('Y-m-d H:i:s')
             );
-            $calculated[$key]['humidity'] = (doubleval($curr['humidity'])) * 100;
+            $calculated[$key]['humidity'] = (doubleval ($curr['humidity'])) * 100;
             $epochUV = $curr['uvIndexTime'];
-            $calculated[$key]['uv'] = array(
-                "uv"=>(doubleval($curr['uvIndex'])),
-                "uvTime"=>(new DateTime("@$epochUV"))->format('Y-m-d H:i:s')
+            $calculated[$key]['uv'] = array (
+                "uv" => (doubleval ($curr['uvIndex'])),
+                "uvTime" => (new DateTime("@$epochUV"))->format ('Y-m-d H:i:s')
             );
-        }
+        });
         return $calculated;
     }
 
-    public function getWeatherByConditions(Request $request){
+    public function getWeatherByConditions(Request $request): array
+    {
         if($request->conditions == "current"){
             return $this->getCurrently();
         }else if($request->conditions == "hourly"){
