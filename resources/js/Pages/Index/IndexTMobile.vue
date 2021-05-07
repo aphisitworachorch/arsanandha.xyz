@@ -3,12 +3,6 @@
         <div>
             <div class="uk-container uk-padding-large uk-text-center">
                 <div class="container">
-                    <vk-card :style="{ backgroundImage: `url(${this.img}), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5))`,backgroundRepeat: 'no-repeat',backgroundAttachment: 'fixed',backgroundPosition: 'center' }">
-                        <DateSlotT v-bind:remainDate="remainDay" v-bind:remainPractice="remainPractices" v-bind:color="colorist">
-
-                        </DateSlotT>
-                    </vk-card>
-                    <br/>
                     <vk-card>
                         <PhotoMobile v-if="$isMobile()"
                                      v-bind:photolink="photoLink"
@@ -34,7 +28,7 @@ import DateSlotT from "../arsanandha/countdate/DateSlotT";
         metaInfo:{
             title:"ARSANANDHA"
         },
-        props:['verse','references','photoLink','infoUnsplashUsername','infoUnsplash','remainDay','remainPractices'],
+        props:['verse','references','photoLink','infoUnsplashUsername','infoUnsplash'],
         data: () => {
             return{
                 myself: "https://avatars.githubusercontent.com/aphisitworachorch",
@@ -43,7 +37,6 @@ import DateSlotT from "../arsanandha/countdate/DateSlotT";
             }
         },
         components:{
-            DateSlotT,
             PhotoMobile,
             Photo,
             AppLayout

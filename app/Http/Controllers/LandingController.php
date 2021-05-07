@@ -19,9 +19,6 @@ class LandingController extends Controller
             ->term(BibleVerseController::bible()['verse']['details']['text'])
             ->count(1)
             ->toJson();
-
-        $timeLeft = new MilitaryTimelineController();
-        $at = $timeLeft->getRemainingTime();
         $agent = new Agent();
         if($agent->isMobile() || $agent->isTablet() || $agent->isGenericPhone() || $agent->isGenericTablet()){
             return Inertia::render('Index/IndexTMobile',[
@@ -30,8 +27,6 @@ class LandingController extends Controller
                 'photoLink'=>$photo[0]->urls->regular,
                 'infoUnsplash'=>$photo[0]->user->name,
                 'infoUnsplashUsername'=>$photo[0]->user->username,
-                'remainDay'=>$at['remainDay'],
-                'remainPractices'=>$at['remainPracticeMonths']
             ]);
         }else{
             return Inertia::render('Index/IndexT',[
@@ -40,8 +35,6 @@ class LandingController extends Controller
                 'photoLink'=>$photo[0]->urls->regular,
                 'infoUnsplash'=>$photo[0]->user->name,
                 'infoUnsplashUsername'=>$photo[0]->user->username,
-                'remainDay'=>$at['remainDay'],
-                'remainPractices'=>$at['remainPracticeMonths']
             ]);
         }
 

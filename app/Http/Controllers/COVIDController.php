@@ -10,10 +10,33 @@ use Phattarachai\LineNotify\Line;
 
 class COVIDController extends Controller
 {
-    public static function covidHeartBeat()
+    public function covidAPICall ()
+    {
+        $covidHttp = Http::retry (10, 100)->get ('https://covid19.th-stat.com/api/open/today')->json ();
+        if (!empty($covidHttp)) {
+            if ($covidHttp['NewConfirmed'] != "") {
+                $data = CovidToday::create (
+                    array (
+                        "total_covid" => $covidHttp['Confirmed'],
+                        "today_covid" => $covidHttp['NewConfirmed'],
+                        "total_recovered" => $covidHttp['Recovered'],
+                        "today_recovered" => $covidHttp['NewRecovered']
+                    )
+                );
+                if ($data->id) {
+                    return $covidHttp;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    public function covidHeartBeat()
     {
         try{
-            $dataF = Http::retry(10,100)->get('https://covid19.th-stat.com/api/open/today')->json();
+            $dataF = $this->covidAPICall ();
             if(!empty($dataF)){
                 if($dataF['NewConfirmed'] != ""){
                     $lineNotify = new Line(env('LINE_NOTIFY_LOGGER_ACCESS_TOKEN'));

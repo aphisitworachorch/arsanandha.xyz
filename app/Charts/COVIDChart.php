@@ -29,7 +29,7 @@ class COVIDChart extends BaseChart
             array_push($dataChart['dataset_1'],$dc->today_covid);
         }
         return Chartisan::build()
-            ->labels($dataChart['labels'])
-            ->dataset('Today Covid', $dataChart['dataset_1']);
+            ->labels(array_unique($dataChart['labels']))
+            ->dataset('Today Covid', array_unique($dataChart['dataset_1']));
     }
 }
