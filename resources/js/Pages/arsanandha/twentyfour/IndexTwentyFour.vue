@@ -21,8 +21,8 @@
         },
         data: () => {
             return{
-                imgX: require('../../../../img/weblogo-02.svg'),
-                bigLogo: require('../../../../img/SetupLogo-01.svg'),
+                imgX: require('../../../../img/weblogo-02.svg').default,
+                bigLogo: require('../../../../img/SetupLogo-01.svg').default,
                 stat: "In Development Stage"
             }
         }

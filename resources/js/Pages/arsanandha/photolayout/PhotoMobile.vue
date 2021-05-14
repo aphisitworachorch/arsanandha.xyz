@@ -21,8 +21,8 @@ export default {
     props:['photolink','verse','references','infoUnsplash','infoUnsplashUsername'],
     data: () => {
         return {
-            imgX: require('../../../../img/ARSANANDHA-AE-LOGO-02.png'),
-            unsplash: require('../../../../img/Unsplash_Logo_Full-02.png')
+            imgX: require('../../../../img/ARSANANDHA-AE-LOGO-02.png').default,
+            unsplash: require('../../../../img/Unsplash_Logo_Full-02.png').default
         }
     }
 }

@@ -44,7 +44,7 @@ export default {
     },
     data: () => {
         return {
-            card: require('../../../../../img/card/card.png'),
+            card: require('../../../../../img/card/card.png').default,
             depColor:{
                 "SOCDEP":'#034EA2',
                 "ENGDEP":'#A03522',

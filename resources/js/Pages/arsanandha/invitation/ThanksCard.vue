@@ -61,7 +61,7 @@ export default {
                 faculty_id: "",
                 message_to: ""
             },
-            card: require('../../../../img/card/card.png')
+            card: require('../../../../img/card/card.png').default
         }
     },
     methods: {

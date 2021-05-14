@@ -20,7 +20,7 @@
         },
         data:()=>{
             return{
-                ktkImage: require('../../../../img/activities/SUTKTK.jpg'),
+                ktkImage: require('../../../../img/activities/SUTKTK.jpg').default,
             }
         }
     }

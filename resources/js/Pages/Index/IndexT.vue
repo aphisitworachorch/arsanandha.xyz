@@ -31,7 +31,7 @@ import DateSlotT from "../arsanandha/countdate/DateSlotT";
         data: () => {
             return{
                 myself: "https://avatars.githubusercontent.com/aphisitworachorch",
-                img: require('../../../img/conscript.jpg'),
+                img: require('../../../img/conscript.jpg').default,
                 colorist: 'white'
             }
         },

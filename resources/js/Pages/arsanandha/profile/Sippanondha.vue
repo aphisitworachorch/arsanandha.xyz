@@ -20,7 +20,7 @@ export default {
   },
   data:()=>{
     return{
-      spnImage: require('../../../../img/activities/SIPPANONDHA.jpg'),
+      spnImage: require('../../../../img/activities/SIPPANONDHA.jpg').default,
     }
   }
 }

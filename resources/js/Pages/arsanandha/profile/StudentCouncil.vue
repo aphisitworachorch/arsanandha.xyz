@@ -20,7 +20,7 @@
         },
         data:()=>{
           return{
-            sapaImage: require('../../../../img/activities/SUTSAPA.jpg'),
+            sapaImage: require('../../../../img/activities/SUTSAPA.jpg').default,
           }
         }
     }

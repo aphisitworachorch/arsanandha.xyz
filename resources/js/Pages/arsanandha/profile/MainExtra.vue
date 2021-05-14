@@ -55,9 +55,9 @@ export default {
     data: () => {
         return {
             headImage: {
-                ktk: require('../../../../img/headline/sutkatakorn.png'),
-                s7: require('../../../../img/headline/S7.png'),
-                sutsc: require('../../../../img/headline/SCSUT.png'),
+                ktk: require('../../../../img/headline/sutkatakorn.png').default,
+                s7: require('../../../../img/headline/S7.png').default,
+                sutsc: require('../../../../img/headline/SCSUT.png').default,
             },
             details: {
                 scsut: "",

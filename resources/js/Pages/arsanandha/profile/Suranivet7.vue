@@ -25,7 +25,7 @@
         },
         data: () => {
             return{
-                s7Image : require('../../../../img/s7/suranivet7sharp8.jpg'),
+                s7Image : require('../../../../img/s7/suranivet7sharp8.jpg').default,
                 friendList: {
                     "nameOfFriends":[
                         "Por Chainarin" ,

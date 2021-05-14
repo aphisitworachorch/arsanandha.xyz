@@ -18,7 +18,7 @@
         "cross-env": "^7.0.3",
         "jquery": "^3.5.1",
         "laravel-jetstream": "^0.0.3",
-        "laravel-mix": "^5.0.9",
+        "laravel-mix": "^6.0.19",
         "lodash": "^4.17.20",
         "portal-vue": "^2.1.7",
         "postcss-import": "^12.0.1",
@@ -27,6 +27,7 @@
         "sass-loader": "^10.1.0",
         "tailwindcss": "^1.9.6",
         "vue": "^2.5.17",
+        "vue-loader": "^15.9.5",
         "vue-server-renderer": "^2.6.12",
         "vue-template-compiler": "^2.6.10"
     },
