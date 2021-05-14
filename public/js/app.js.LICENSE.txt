@@ -26,17 +26,6 @@
  * Licensed MIT © Zeno Rocha
  */
 
-/*! 
-  * portal-vue © Thorsten Lünborg, 2019 
-  * 
-  * Version: 2.1.7
-  * 
-  * LICENCE: MIT 
-  * 
-  * https://github.com/linusborg/portal-vue
-  * 
- */
-
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -83,7 +72,7 @@ and limitations under the License.
  */
 
 /**
- * Vuikit 0.8.10
+ * Vuikit - @vuikit/icons 0.8.1
  * (c) 2018 Miljan Aleksic
  * @license MIT
 **/

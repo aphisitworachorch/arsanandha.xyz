@@ -41,7 +41,7 @@
         name: "Main",
         data: () => {
             return {
-                imgX: require('../../img/ATTTT-01.png'),
+                imgX: require('../../img/ATTTT-01.png').default,
                 colorOfDay : [
                     "#c9242b",
                     "#dba73b",
