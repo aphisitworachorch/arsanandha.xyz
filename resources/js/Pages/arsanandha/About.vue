@@ -118,17 +118,17 @@
                     <vk-card-title>Extracurricular Activities 🏫</vk-card-title>
                     <vk-grid>
                         <div>
-                            <router-link to="/profile/ktk"><h4>Katakorn of SUT ✨</h4></router-link>
+                            <a href="/extracurriculars/katakorn"><h4>Katakorn of SUT ✨</h4></a>
                         </div>
                         <div>
-                            <router-link to="/profile/s7"><h4>Suranivet 7 Dormitory (Graphics Creator) 🏢</h4>
-                            </router-link>
+                            <a href="/extracurriculars/s7"><h4>Suranivet 7 Dormitory (Graphics Creator) 🏢</h4>
+                            </a>
                         </div>
                         <div>
-                            <router-link to="/profile/sutsc"><h4>Student Council of SUT 👨‍🎓</h4></router-link>
+                            <a href="/extracurriculars/sutsapa"><h4>Student Council of SUT 👨‍🎓</h4></a>
                         </div>
                         <div>
-                            <router-link to="/profile/sippanondha"><h4>Sippanondha Science Camp ⛺</h4></router-link>
+                            <a href="/extracurriculars/sippanondha"><h4>Sippanondha Science Camp ⛺</h4></a>
                         </div>
                     </vk-grid>
                 </vk-card>
@@ -189,7 +189,7 @@ let workExperienceData = {
     },
     memessage: {
         start: moment(new Date(2020, 10, 17, 9, 0, 0)),
-        end: moment(new Date(2020,4,1,9,0,0))
+        end: moment(new Date())
     }
 }
 let workExperienceDataDiff = {

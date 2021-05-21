@@ -1,27 +1,17 @@
 <template>
     <div>
-        <fixed-header @change="updateFixedStatus" :threshold="propsData.threshold" :headerClass="propsData.headerClass" :fixedClass="propsData.fixedClass" :hideScrollUp="propsData.hideScrollUp">
-            <vk-navbar v-bind:style="{ backgroundColor: getColor() }" class="nav" >
-                <vk-navbar-logo slot="center">
-                    <transition appear enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeIn" mode="in-out">
-<!--                        <div @click="variableshow = !variableshow">-->
-                        <div>
-                            <img v-if="show" :src="imgX" alt="ARSANANDHA" v-bind:style="{ height: '80px'}"/>
-                        </div>
-                    </transition>
-                </vk-navbar-logo>
-<!--                <vk-navbar-item>-->
-<!--                    <vk-offcanvas-content>-->
-<!--                        <vk-offcanvas  overlay mode="reveal" :show.sync="variableshow">-->
-<!--                            <vk-offcanvas-close @click="variableshow = false" v-bind:style="{ color: getColor() }" ></vk-offcanvas-close>-->
-<!--                            <p v-bind:style="{ color: getColor() }" >-->
-<!--                                Hi ! I'm ARSANANDHA+-->
-<!--                            </p>-->
-<!--                        </vk-offcanvas>-->
-<!--                    </vk-offcanvas-content>-->
-<!--                </vk-navbar-item>-->
-            </vk-navbar>
-        </fixed-header>
+        <transition appear enter-active-class="animate__animated animate__fadeInDown" leave-active-class="animate__animated animate__fadeOutUp" mode="in-out">
+            <fixed-header @change="updateFixedStatus" :threshold="propsData.threshold" :headerClass="propsData.headerClass" :fixedClass="propsData.fixedClass" :hideScrollUp="propsData.hideScrollUp">
+                <!-- v-bind:style="{ backgroundColor: getColor() }"  !-->
+                <vk-navbar v-bind:style="{ background: convertHex(getColor()) }" class="nav glass" >
+                    <vk-navbar-logo slot="center">
+                            <div>
+                                <img v-if="show" :src="imgX" alt="ARSANANDHA" style="min-width:350px;!important;height:60px;!important;"/>
+                            </div>
+                    </vk-navbar-logo>
+                </vk-navbar>
+            </fixed-header>
+        </transition>
         <div class="uk-container" v-bind:class="{ headerIsFixed: fixedStatus.headerIsFixed }">
             <slot></slot>
         </div>
@@ -30,8 +20,9 @@
 </template>
 
 <script>
-    import FixedHeader from 'vue-fixed-header'
-    const createData = () => ({
+import FixedHeader from 'vue-fixed-header'
+
+const createData = () => ({
         threshold: 0,
         headerClass: "vue-fixed-header",
         fixedClass: "vue-fixed-header--isFixed",
@@ -56,7 +47,8 @@
                 propsData: { ...createData() },
                 formData: { ...createData() },
                 show: true,
-                variableshow: false
+                variableshow: false,
+                opacity: 65
             }
         },
         components:{
@@ -68,6 +60,13 @@
             },
             getColor(){
                 return this.colorOfDay[((new Date()).getDay())];
+            },
+            convertHex: function (color) {
+                color = color.replace('#', '')
+                let r = parseInt(color.substring(0, 2), 16)
+                let g = parseInt(color.substring(2, 4), 16)
+                let b = parseInt(color.substring(4, 6), 16)
+                return 'rgba(' + r + ',' + g + ',' + b + ',' + this.opacity / 100 + ')'
             }
         }
     }
@@ -91,5 +90,11 @@
 
     .uk-container.headerIsFixed
         transform: translateY(56px) !important
+
+    .glass
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 )
+        backdrop-filter: blur( 10px )
+        -webkit-backdrop-filter: blur( 10px )
+        border: 1px solid rgba( 255, 255, 255, 0.18 )
 
 </style>

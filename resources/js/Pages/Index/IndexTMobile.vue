@@ -1,28 +1,30 @@
 <template>
-    <app-layout>
-        <div>
-            <div class="uk-container uk-padding-large uk-text-center">
-                <div class="container">
-                    <vk-card>
-                        <PhotoMobile v-if="$isMobile()"
-                                     v-bind:photolink="photoLink"
-                                     v-bind:verse="verse"
-                                     v-bind:infoUnsplash="infoUnsplash"
-                                     v-bind:infoUnsplashUsername="infoUnsplashUsername"
-                                     v-bind:references="references"
-                                     ></PhotoMobile>
-                    </vk-card>
+    <div v-bind:style="{ 'background-image': 'url(' + photoLink + ')',backgroundPosition:'center',backgroundSize:'cover' }">
+        <Main>
+            <div>
+                <div class="uk-container uk-text-center" style="padding-top: 40px;padding-bottom: 50px;">
+                    <div class="container">
+                        <vk-card class="glass">
+                            <PhotoMobile v-if="$isMobile()"
+                                         v-bind:photolink="photoLink"
+                                         v-bind:verse="verse"
+                                         v-bind:infoUnsplash="infoUnsplash"
+                                         v-bind:infoUnsplashUsername="infoUnsplashUsername"
+                                         v-bind:references="references"
+                                         ></PhotoMobile>
+                        </vk-card>
+                    </div>
                 </div>
             </div>
-        </div>
-    </app-layout>
+        </Main>
+    </div>
 </template>
 
 <script>
-import AppLayout from "../../Layouts/Main";
 import Photo from "../arsanandha/photolayout/Photo";
 import PhotoMobile from "../arsanandha/photolayout/PhotoMobile";
 import DateSlotT from "../arsanandha/countdate/DateSlotT";
+import Main from "../../Layouts/Main";
     export default {
         name: "IndexTMobile",
         metaInfo:{
@@ -37,9 +39,9 @@ import DateSlotT from "../arsanandha/countdate/DateSlotT";
             }
         },
         components:{
+            Main,
             PhotoMobile,
-            Photo,
-            AppLayout
+            Photo
         }
     }
 </script>
@@ -53,4 +55,13 @@ import DateSlotT from "../arsanandha/countdate/DateSlotT";
 
     .center
         text-align: center
+
+    .glass
+        background: rgba( 255, 255, 255, 0.65 )
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 )
+        backdrop-filter: blur( 10px )
+        -webkit-backdrop-filter: blur( 10px )
+        border-radius: 10px
+        border: 1px solid rgba( 255, 255, 255, 0.18 )
+
 </style>

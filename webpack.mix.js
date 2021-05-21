@@ -18,6 +18,7 @@ mix.js('resources/js/app.js', 'public/js').vue()
         processCssUrls: false,
         postCss: [ tailwindcss('./tailwind.config.js')],
     })
+    .copy( 'resources/img/icon/', 'public/images/icon' )
 
 if (mix.inProduction()) {
     mix.version();
