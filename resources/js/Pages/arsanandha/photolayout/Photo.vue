@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="grid grid-flow-col grid-cols-3 auto-cols-max md:auto-cols-min">
+        <div class="grid grid-flow-col grid-cols-3 auto-cols-max md:auto-cols-min" style="padding-top:-20px;padding-bottom:100px;height:400px;">
             <img :src="photolink" class="col-span-1" alt="photo" v-bind:style="{ objectFit: 'cover', width:'300px',height:'400px' }"/>
             <div class="col-span-2" style="margin-top: 10%;margin-bottom: 10%">
                 <img :src="imgX" v-bind:style="{ width: '50%'}"/>

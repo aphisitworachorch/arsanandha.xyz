@@ -1,8 +1,8 @@
 <template>
-    <div v-bind:style="{ 'background-image': 'url(' + photoLink + ')',backgroundPosition:'center',backgroundSize:'cover' }">
+    <div v-bind:style="{ 'background-image': 'url(' + photoLink + ')',backgroundPosition:'center',backgroundSize:'cover',paddingBottom:'38px' }" class="blackwhite">
         <Main>
             <div>
-                <div class="uk-container uk-text-center" style="padding-top:35px;padding-bottom:31px;">
+                <div class="uk-container uk-text-center" style="padding-top:65px;padding-bottom:31px;">
                     <div class="container">
                         <vk-card class="glass" style="height:70%;">
                             <Photo v-if="!$isMobile()"
@@ -22,7 +22,6 @@
 <script>
 import Photo from "../arsanandha/photolayout/Photo";
 import PhotoMobile from "../arsanandha/photolayout/PhotoMobile";
-import DateSlotT from "../arsanandha/countdate/DateSlotT";
 import Main from "../../Layouts/Main";
     export default {
         name: "IndexT",
@@ -32,8 +31,6 @@ import Main from "../../Layouts/Main";
         props:['verse','references','photoLink','infoUnsplashUsername','infoUnsplash'],
         data: () => {
             return{
-                myself: "https://avatars.githubusercontent.com/aphisitworachorch",
-                img: require('../../../img/conscript.jpg').default,
                 colorist: 'white'
             }
         },
@@ -62,4 +59,17 @@ import Main from "../../Layouts/Main";
         -webkit-backdrop-filter: blur( 10px )
         border-radius: 10px
         border: 1px solid rgba( 255, 255, 255, 0.18 )
+
+    @keyframes blackwhiteToColor
+        from
+            -webkit-filter: grayscale(100%)
+            filter: grayscale(100%)
+        to
+            -webkit-filter: grayscale(0%)
+            filter: grayscale(0%)
+
+    .blackwhite
+        -webkit-animation: ease-out blackwhiteToColor 5s both
+        -moz-animation: ease-out blackwhiteToColor 5s both
+        animation: ease-out blackwhiteToColor 5s both
 </style>

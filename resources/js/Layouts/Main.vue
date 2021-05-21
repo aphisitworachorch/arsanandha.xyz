@@ -5,8 +5,11 @@
                 <!-- v-bind:style="{ backgroundColor: getColor() }"  !-->
                 <vk-navbar v-bind:style="{ background: convertHex(getColor()) }" class="nav glass" >
                     <vk-navbar-logo slot="center">
+<!--                            <div>-->
+<!--                                <img v-if="show" :src="imgX" alt="ARSANANDHA" style="min-width:350px;!important;height:60px;!important;"/>-->
+<!--                            </div>-->
                             <div>
-                                <img v-if="show" :src="imgX" alt="ARSANANDHA" style="min-width:350px;!important;height:60px;!important;"/>
+                                <img v-if="show" :src="myself" alt="ARSANANDHA" style="height:60px;!important;border-radius:100%;" class="circular"/>
                             </div>
                     </vk-navbar-logo>
                 </vk-navbar>
@@ -48,7 +51,8 @@ const createData = () => ({
                 formData: { ...createData() },
                 show: true,
                 variableshow: false,
-                opacity: 65
+                opacity: 65,
+                myself: "https://avatars.githubusercontent.com/aphisitworachorch"
             }
         },
         components:{
@@ -97,4 +101,18 @@ const createData = () => ({
         -webkit-backdrop-filter: blur( 10px )
         border: 1px solid rgba( 255, 255, 255, 0.18 )
 
+    @keyframes squareToCircle
+        from
+            border-radius : 0
+            -webkit-filter: grayscale(100%)
+            filter: grayscale(100%)
+        to
+            border-radius : 100%
+            -webkit-filter: grayscale(0%)
+            filter: grayscale(0%)
+
+    .circular
+        -webkit-animation: ease-out squareToCircle 1.75s both
+        -moz-animation: ease-out squareToCircle 1.75s both
+        animation: ease-out squareToCircle 1.75s both
 </style>

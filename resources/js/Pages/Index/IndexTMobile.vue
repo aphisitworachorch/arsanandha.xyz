@@ -1,5 +1,5 @@
 <template>
-    <div v-bind:style="{ 'background-image': 'url(' + photoLink + ')',backgroundPosition:'center',backgroundSize:'cover' }">
+    <div v-bind:style="{ 'background-image': 'url(' + photoLink + ')',backgroundPosition:'center',backgroundSize:'cover' }" class="blackwhite">
         <Main>
             <div>
                 <div class="uk-container uk-text-center" style="padding-top: 40px;padding-bottom: 50px;">
@@ -64,4 +64,16 @@ import Main from "../../Layouts/Main";
         border-radius: 10px
         border: 1px solid rgba( 255, 255, 255, 0.18 )
 
+    @keyframes blackwhiteToColor
+        from
+            -webkit-filter: grayscale(100%)
+            filter: grayscale(100%)
+        to
+            -webkit-filter: grayscale(0%)
+            filter: grayscale(0%)
+
+    .blackwhite
+        -webkit-animation: ease-out blackwhiteToColor 5s both
+        -moz-animation: ease-out blackwhiteToColor 5s both
+        animation: ease-out blackwhiteToColor 5s both
 </style>
