@@ -3,7 +3,7 @@
         <transition appear enter-active-class="animate__animated animate__fadeInDown" leave-active-class="animate__animated animate__fadeOutUp" mode="in-out">
             <fixed-header @change="updateFixedStatus" :threshold="propsData.threshold" :headerClass="propsData.headerClass" :fixedClass="propsData.fixedClass" :hideScrollUp="propsData.hideScrollUp">
                 <!-- v-bind:style="{ backgroundColor: getColor() }"  !-->
-                <vk-navbar v-bind:style="{ background: convertHex(getColor()) }" class="nav glass" >
+                <vk-navbar v-bind:style="{ background: convertHex(getColor()) }" class="nav" >
                     <vk-navbar-logo slot="center">
 <!--                            <div>-->
 <!--                                <img v-if="show" :src="imgX" alt="ARSANANDHA" style="min-width:350px;!important;height:60px;!important;"/>-->
@@ -51,7 +51,7 @@ const createData = () => ({
                 formData: { ...createData() },
                 show: true,
                 variableshow: false,
-                opacity: 65,
+                opacity: 100,
                 myself: "https://avatars.githubusercontent.com/aphisitworachorch"
             }
         },

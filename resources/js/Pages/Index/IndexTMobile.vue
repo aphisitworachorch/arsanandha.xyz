@@ -1,5 +1,5 @@
 <template>
-    <div v-bind:style="{ 'background-image': 'url(' + photoLink + ')',backgroundPosition:'center',backgroundSize:'cover' }" class="blackwhite">
+    <div v-bind:style="{ 'background-image': 'url(' + photoLink + ')',backgroundPosition:'center' }" class="blackwhite">
         <Main>
             <div>
                 <div class="uk-container uk-text-center" style="padding-top: 40px;padding-bottom: 50px;">
