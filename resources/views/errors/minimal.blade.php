@@ -24,6 +24,60 @@
                 border: 1px solid rgba( 255, 255, 255, 0.18 );
                 color: white;
             }
+            @keyframes shear {
+                from {
+                    transform: skew(0turn, 0deg);
+                }
+                to {
+                    transform: skew(0turn, 5deg);
+                }
+            }
+            @-webkit-keyframes shear {
+                from {
+                    -webkit-transform: skew(0turn, 0deg);
+                }
+                to {
+                    -webkit-transform: skew(0turn, 5deg);
+                }
+            }
+            @-moz-keyframes shear {
+                from {
+                    -moz-transform: skew(0turn, 0deg);
+                }
+                to {
+                    -moz-transform: skew(0turn, 5deg);
+                }
+            }
+            @-o-keyframes shear {
+                from {
+                    -o-transform: skew(0turn, 0deg);
+                }
+                to {
+                    -o-transform: skew(0turn, 5deg);
+                }
+            }
+            @-ms-keyframes shear {
+                from {
+                    -ms-transform: skew(0turn, 0deg);
+                }
+                to {
+                    -ms-transform: skew(0turn, 5deg);
+                }
+            }
+            .shearer{
+                animation: shear;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+                -webkit-animation: shear;
+                -webkit-animation-duration: 1s;
+                -webkit-animation-timing-function: ease-out;
+                -moz-animation: shear;
+                -moz-animation-duration: 1s;
+                -moz-animation-timing-function: ease-out;
+                -o-animation: shear;
+                -o-animation-duration: 1s;
+                -o-animation-timing-function: ease-out;
+            }
         </style>
 
         <style>
@@ -35,9 +89,12 @@
                 background-position: center;
             }
         </style>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></link>
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center sm:items-center sm:pt-0" style="padding:12%;">
+        <div class="relative flex items-top justify-center sm:items-center sm:pt-0 shearer" style="padding:12%;transform:skew(0turn,5deg);">
             <div class="max-w-xl mx-auto sm:px-6 lg:px-8 glass" style="text-align: center;">
                 <div class="flex items-center pt-8 sm:justify-start sm:pt-0">
                     <h1 style="font-size:6em;">
