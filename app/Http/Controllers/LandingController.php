@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobHistory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Validation\Rules\In;
@@ -42,7 +44,10 @@ class LandingController extends Controller
 
     public function about():\Inertia\Response
     {
-        return Inertia::render('arsanandha/About');
+        $job = JobHistory::all();
+        return Inertia::render('arsanandha/About',[
+            'jobHistory'=>$job
+        ]);
     }
 
     public function burdenInsert():\Inertia\Response
@@ -70,5 +75,9 @@ class LandingController extends Controller
         }else if($request->activity == null){
             return Inertia::render('arsanandha/profile/MainExtra');
         }
+    }
+
+    public function logUser(Request $request){
+
     }
 }
