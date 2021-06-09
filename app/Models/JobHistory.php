@@ -11,6 +11,6 @@ class JobHistory extends Model
 
     protected $table = "job_history";
     protected $fillable = [
-        "company","job_title","start","end","company_color"
+        "company","job_title","start","end","company_color","logo","backdrop"
     ];
 }

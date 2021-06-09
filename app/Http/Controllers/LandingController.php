@@ -44,9 +44,9 @@ class LandingController extends Controller
 
     public function about():\Inertia\Response
     {
-        $job = JobHistory::all();
+        $job = JobHistory::query ()->orderBy('end')->get();
         return Inertia::render('arsanandha/About',[
-            'jobHistory'=>$job
+            'jobDetails'=>$job
         ]);
     }
 

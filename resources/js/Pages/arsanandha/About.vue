@@ -65,51 +65,18 @@
                 <br/>
                 <vk-card id="experiences">
                     <vk-card-title>Experiences 🏢⚒</vk-card-title>
-                    <vk-grid>
-                        <div>
+                    <vk-grid gutter="large" class="uk-child-width-1-2@xl uk-flex-center">
+                        <div v-for="job in jobDetails">
                             <div>
-                                <vk-card class="backdrop">
-                                    <img src="https://www.bizpotential.com/images/logo.png" width="160px"/>
-                                </vk-card>
+                                <WorkExperienceComponents
+                                    v-bind:logo="job.logo"
+                                    v-bind:company_name="job.company"
+                                    v-bind:position="job.job_title"
+                                    v-bind:startDate="job.start"
+                                    v-bind:colorProfile="job.company_color"
+                                    v-bind:backdrop="job.backdrop"
+                                    v-bind:endDate="job.end"></WorkExperienceComponents>
                             </div>
-                            <vk-card class="bizpotential">
-                                <vk-card-title class="colorful">BizPotential</vk-card-title>
-                                <p>From {{ work_experience.bizpotential.start }} To {{
-                                        work_experience.bizpotential.to
-                                    }}</p>
-                                <p>Duration {{ work_experience.bizpotential.duration.months }} Months /
-                                    {{ work_experience.bizpotential.duration.days }} Days</p>
-                            </vk-card>
-                        </div>
-                        <div>
-                            <div>
-                                <vk-card>
-                                    <img
-                                        src="https://s4745.pcdn.co/wp-content/uploads/2017/11/Benchmark-electronics-logo.jpg"
-                                        width="160px"/>
-                                </vk-card>
-                            </div>
-                            <vk-card class="benchmark">
-                                <vk-card-title class="colorful">Benchmark</vk-card-title>
-                                <p>From {{ work_experience.benchmark.start }} To {{ work_experience.benchmark.to }}</p>
-                                <p>Duration {{ work_experience.benchmark.duration.months }} Months /
-                                    {{ work_experience.benchmark.duration.days }} Days</p>
-                            </vk-card>
-                        </div>
-                        <div>
-                            <div>
-                                <vk-card>
-                                    <img
-                                        src="https://www.korat.com/uploads/logo/default_logo_korat_d41mz583hw16099536991e73552cad61c999213751f89622eb6c.png"
-                                        width="160px"/>
-                                </vk-card>
-                            </div>
-                            <vk-card class="memessage">
-                                <vk-card-title class="colorful">Korat.com (MEMESSAGE)</vk-card-title>
-                                <p>From {{ work_experience.memessage.start }} To {{ work_experience.memessage.to }}</p>
-                                <p>Duration {{ work_experience.memessage.duration.months }} Months /
-                                    {{ work_experience.memessage.duration.days }} Days</p>
-                            </vk-card>
                         </div>
                     </vk-grid>
                 </vk-card>
@@ -175,28 +142,10 @@
 <script>
 import moment from 'moment';
 import AppLayout from "../../Layouts/Main";
+import WorkExperienceComponents from "./WorkExperienceComponents";
 
 moment.locale('en');
 let birthDayData = moment(new Date(1998, 0, 7, 15, 18, 30));
-let workExperienceData = {
-    bizpotential: {
-        start: moment(new Date(2020, 7, 10, 10, 10, 10)),
-        end: moment(new Date(2020,10,5,10,10,10))
-    },
-    benchmark: {
-        start: moment(new Date(2020, 2, 2, 9, 0, 0)),
-        end: moment(new Date(2020, 5, 30, 17, 0, 0))
-    },
-    memessage: {
-        start: moment(new Date(2020, 10, 17, 9, 0, 0)),
-        end: moment(new Date())
-    }
-}
-let workExperienceDataDiff = {
-    bizpotential: moment.duration(workExperienceData.bizpotential.end.diff(workExperienceData.bizpotential.start)),
-    benchmark: moment.duration(workExperienceData.benchmark.end.diff(workExperienceData.benchmark.start)),
-    memessage: moment.duration(workExperienceData.memessage.end.diff(workExperienceData.memessage.start))
-}
 
 export default {
     name: "About",
@@ -208,8 +157,10 @@ export default {
         ]
     },
     components: {
+        WorkExperienceComponents,
         AppLayout
     },
+    props:['jobDetails'],
     data: () => {
         return {
             yearBd: "",
@@ -219,33 +170,7 @@ export default {
             minBd: "",
             secBd: "",
             milsecBd: "",
-            bData: birthDayData.format('LLLL'),
-            work_experience: {
-                bizpotential: {
-                    start: moment(workExperienceData.bizpotential.start).format('LLLL'),
-                    to: moment(workExperienceData.bizpotential.end).format('LLLL'),
-                    duration: {
-                        months: workExperienceDataDiff.bizpotential.months(),
-                        days: workExperienceDataDiff.bizpotential.days()
-                    }
-                },
-                benchmark: {
-                    start: moment(workExperienceData.benchmark.start).format('LLLL'),
-                    to: moment(workExperienceData.benchmark.end).format('LLLL'),
-                    duration: {
-                        months: workExperienceDataDiff.benchmark.months(),
-                        days: workExperienceDataDiff.benchmark.days()
-                    }
-                },
-                memessage: {
-                    start: moment(workExperienceData.memessage.start).format('LLLL'),
-                    to: moment(workExperienceData.memessage.end).format('LLLL'),
-                    duration: {
-                        months: workExperienceDataDiff.memessage.months(),
-                        days: workExperienceDataDiff.memessage.days()
-                    }
-                }
-            }
+            bData: birthDayData.format('LLLL')
         }
     },
     /* birthday() use for birthday data */
