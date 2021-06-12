@@ -23,7 +23,7 @@ class LandingController extends Controller
             ->count(1)
             ->toJson();
         $agent = new Agent();
-        print_r(BibleVerseController::abbreviate (BibleVerseController::bible()['verse']['details']['reference']));
+//        print_r(BibleVerseController::abbreviate (BibleVerseController::bible()['verse']['details']['reference']));
         if($agent->isMobile() || $agent->isTablet() || $agent->isGenericPhone() || $agent->isGenericTablet()){
             return Inertia::render('Index/IndexTMobile',[
                 'verse'=>BibleVerseController::bible()['verse']['details']['text'],
