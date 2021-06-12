@@ -5,7 +5,7 @@
             <div class="col-span-2" style="margin-top: 10%;margin-bottom: 10%">
                 <img :src="imgX" v-bind:style="{ width: '50%'}" class="animate__animated animate__fadeInRight animate__delay-2s"/>
                 <h3 style="text-align: left" class="animate__animated animate__fadeIn animate__delay-2s">" {{ verse }} "</h3>
-                <p style="text-align: left" class="animate__animated animate__fadeIn animate__delay-2s" @click="getBibleTNCVLink(references)">{{ references }}</p>
+                <p style="text-align: left" class="animate__animated animate__fadeIn animate__delay-2s" @click="getBibleTNCVLink(references)">{{ references }} (Click for Thai TNCV Bible)</p>
                 <img :src="unsplash" v-bind:style="{ width: '20%'}" class="animate__animated animate__fadeIn animate__delay-3s"/>
                 <p style="text-align: left" class="animate__animated animate__fadeIn animate__delay-3s">Photo by : (C) {{ infoUnsplash }} / UNSPLASH : {{ infoUnsplashUsername }}</p>
             </div>
