@@ -15,3 +15,5 @@ yarn-error.log
 /.idea
 /ratchaneekorn
 /covid
+
+package-lock.json

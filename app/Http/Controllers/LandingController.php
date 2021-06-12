@@ -18,10 +18,12 @@ class LandingController extends Controller
     {
         $photo = UnsplashFacade::randomPhoto()
             ->orientation('landscape')
-            ->term(BibleVerseController::bible()['verse']['details']['text'])
+//            ->term(BibleVerseController::bible()['verse']['details']['text'])
+            ->term("jesus christ cross bible")
             ->count(1)
             ->toJson();
         $agent = new Agent();
+        print_r(BibleVerseController::abbreviate (BibleVerseController::bible()['verse']['details']['reference']));
         if($agent->isMobile() || $agent->isTablet() || $agent->isGenericPhone() || $agent->isGenericTablet()){
             return Inertia::render('Index/IndexTMobile',[
                 'verse'=>BibleVerseController::bible()['verse']['details']['text'],

@@ -1,10 +1,10 @@
 <template>
-    <div v-bind:style="{ 'background-image': 'url(' + photoLink + ')',backgroundPosition:'center',paddingBottom:'38px',height:'100%',backgroundRepeat:'no-repeat',backgroundSize:'cover' }" class="blackwhite">
+    <div v-bind:style="{ 'background-image': 'url(' + photoLink + ')',backgroundPosition:'center',height:'100vh',backgroundRepeat:'no-repeat',backgroundSize:'cover' }" class="blackwhite">
         <Main>
             <div>
-                <div class="uk-container uk-text-center" style="padding-top:65px;padding-bottom:31px;">
+                <div class="uk-container uk-text-center" style="padding-top:35px;padding-bottom:31px;">
                     <div class="container">
-                        <vk-card class="glass" style="height:70%;">
+                        <vk-card class="glass animate__animated animate__bounceIn" style="height:100%;">
                             <Photo v-if="!$isMobile()"
                                    v-bind:photolink="photoLink"
                                    v-bind:verse="verse"
