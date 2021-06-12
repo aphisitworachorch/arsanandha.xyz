@@ -12,7 +12,7 @@ class COVIDController extends Controller
 {
     public function covidAPICall ()
     {
-        $covidHttp = Http::retry (10, 100)->get ('https://covid19.th-stat.com/api/open/today')->json ();
+        $covidHttp = Http::retry (10, 100)->get ('https://covid19.th-stat.com/json/covid19v2/getTodayCases.json')->json ();
         if (!empty($covidHttp)) {
             if ($covidHttp['NewConfirmed'] != "") {
                 $data = CovidToday::create (
