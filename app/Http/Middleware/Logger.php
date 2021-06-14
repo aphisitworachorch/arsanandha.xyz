@@ -20,6 +20,13 @@ class Logger
      */
     public function handle(Request $request, Closure $next)
     {
+        $ip = $request->getClientIp ();
+        $agent = new Agent();
+        $body = array(
+            "ip_address"=>$ip,
+            "header"=>$agent->getHttpHeaders ()
+        );
+        Redis::hSet("request_{$ip}",'ip_address',$ip,'user_agent',$body['user_agent'],'request_body',json_encode($request->all()));
         return $next($request);
     }
     public function terminate($request)
@@ -33,7 +40,6 @@ class Logger
         );
         $random = Str::random(9);
         Cache::increment('visit_today');
-//        Redis::command("HMSET visit_log_{$ip} ip_address '{$ip}' user_agent '{$body['user_agent']}' header_http '{$body['header']}'");
         Redis::hSet("visit_log_{$ip}",'ip_address',$ip,'user_agent',$body['user_agent'],'header_http',json_encode($body['header']));
 //        Cache::tags("visit_log_{$ip}")->put("visit_{$random}",json_encode($body),86400);
     }
