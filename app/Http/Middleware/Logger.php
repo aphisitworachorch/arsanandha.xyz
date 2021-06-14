@@ -37,7 +37,7 @@ class Logger
             "ip_address"=>$ip,
             "user_agent"=>$agent->getUserAgent ()
         );
-        Redis::hSet("request_log:{$this->date}:{$this->random}",'ip_address',$ip,'user_agent',$body['user_agent'],'request_body',json_encode($request->all()));
+        Redis::hSet("request_log:{$this->date}:{$this->random}",'ip_address_v4',(inet_pton($ip)),'ip_address_v6',($ip),'user_agent',$body['user_agent'],'request_body',json_encode($request->all()));
         return $next($request);
     }
     public function terminate($request)
@@ -50,8 +50,8 @@ class Logger
             "header"=>$agent->getHttpHeaders ()
         );
         Cache::increment('visit_today');
-        $cf_ip = CloudflareRealIpServiceProvider::ip ();
-        Redis::hSet("visit_log:{$this->date}:{$this->random}",'ip_address',$ip,'user_agent',$body['user_agent'],'header_http',json_encode($body['header']),'real_ip',$cf_ip);
+        CloudflareRealIpServiceProvider::ip ();
+        Redis::hSet("visit_log:{$this->date}:{$this->random}",'ip_address_v4',(inet_pton($ip)),'ip_address_v6',($ip),'user_agent',$body['user_agent'],'header_http',json_encode($body['header']));
 //        Cache::tags("visit_log_{$ip}")->put("visit_{$random}",json_encode($body),86400);
     }
 }
