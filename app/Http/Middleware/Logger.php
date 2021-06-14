@@ -33,7 +33,8 @@ class Logger
         );
         $random = Str::random(9);
         Cache::increment('visit_today');
-        Redis::command("HMSET visit_log_{$ip} ip_address '{$ip}' user_agent '{$body['user_agent']}' header_http '{$body['header']}'");
+//        Redis::command("HMSET visit_log_{$ip} ip_address '{$ip}' user_agent '{$body['user_agent']}' header_http '{$body['header']}'");
+        Redis::hSet("visit_log_{$ip}",'ip_address',$ip,'user_agent',$body['user_agent'],'header_http',json_encode($body['header']));
 //        Cache::tags("visit_log_{$ip}")->put("visit_{$random}",json_encode($body),86400);
     }
 }
