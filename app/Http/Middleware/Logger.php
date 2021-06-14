@@ -24,7 +24,7 @@ class Logger
         $agent = new Agent();
         $body = array(
             "ip_address"=>$ip,
-            "header"=>$agent->getHttpHeaders ()
+            "user_agent"=>$agent->getUserAgent ()
         );
         Redis::hSet("request_{$ip}",'ip_address',$ip,'user_agent',$body['user_agent'],'request_body',json_encode($request->all()));
         return $next($request);
