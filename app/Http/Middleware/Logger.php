@@ -31,6 +31,7 @@ class Logger
             "header"=>$agent->getHttpHeaders ()
         );
         $random = Str::random(9);
+        Cache::increment('visit_today');
         Cache::tags("visit_log_{$ip}")->put("visit_{$random}",json_encode($body),86400);
     }
 }
