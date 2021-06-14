@@ -26,6 +26,7 @@ class Logger
             "ip_address"=>$ip,
             "user_agent"=>$agent->getUserAgent ()
         );
+        Redis::select(7);
         Redis::hSet("request_{$ip}",'ip_address',$ip,'user_agent',$body['user_agent'],'request_body',json_encode($request->all()));
         return $next($request);
     }
@@ -40,6 +41,7 @@ class Logger
         );
         $random = Str::random(9);
         Cache::increment('visit_today');
+        Redis::select(8);
         Redis::hSet("visit_log_{$ip}",'ip_address',$ip,'user_agent',$body['user_agent'],'header_http',json_encode($body['header']));
 //        Cache::tags("visit_log_{$ip}")->put("visit_{$random}",json_encode($body),86400);
     }
