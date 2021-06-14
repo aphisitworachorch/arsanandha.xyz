@@ -17,9 +17,9 @@ class LandingController extends Controller
     public function index():\Inertia\Response
     {
         $photo = UnsplashFacade::randomPhoto()
-            ->orientation('landscape')
+            ->orientation('portrait')
 //            ->term(BibleVerseController::bible()['verse']['details']['text'])
-            ->term("username=heysupersimi")
+            ->username("heysupersimi")
             ->count(1)
             ->toJson();
         $agent = new Agent();
