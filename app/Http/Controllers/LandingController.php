@@ -19,8 +19,7 @@ class LandingController extends Controller
         $photo = UnsplashFacade::randomPhoto()
             ->orientation('landscape')
 //            ->term(BibleVerseController::bible()['verse']['details']['text'])
-//            ->term("jesus christ cross bible")
-                ->user('heysupersimi')
+            ->term("username=heysupersimi")
             ->count(1)
             ->toJson();
         $agent = new Agent();
