@@ -37,7 +37,7 @@ class Logger
             "ip_address"=>$ip,
             "user_agent"=>$agent->getUserAgent ()
         );
-        Redis::hSet("request_log_:{$this->date}:{$this->random}",'ip_address',$ip,'user_agent',$body['user_agent'],'request_body',json_encode($request->all()));
+        Redis::hSet("request_log:{$this->date}:{$this->random}",'ip_address',$ip,'user_agent',$body['user_agent'],'request_body',json_encode($request->all()));
         return $next($request);
     }
     public function terminate($request)
