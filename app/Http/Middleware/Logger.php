@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 use Jenssegers\Agent\Agent;
 
@@ -32,6 +33,7 @@ class Logger
         );
         $random = Str::random(9);
         Cache::increment('visit_today');
-        Cache::tags("visit_log_{$ip}")->put("visit_{$random}",json_encode($body),86400);
+        Redis::command("HMSET visit_log_{ip} ip_address {$ip} user_agent {$body['user_agent']} header_http {$body['header']}");
+//        Cache::tags("visit_log_{$ip}")->put("visit_{$random}",json_encode($body),86400);
     }
 }
