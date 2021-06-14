@@ -40,7 +40,7 @@ class COVIDController extends Controller
             if(!empty($dataF)){
                 if($dataF['NewConfirmed'] != ""){
                     $lineNotify = new Line(env('LINE_NOTIFY_LOGGER_ACCESS_TOKEN'));
-                    $lastData = CovidToday::orderByDesc('created_at')->orderByDesc('id')->get()->take(1);
+                    $lastData = CovidToday::orderByDesc('id')->get()->take(1);
                     foreach($lastData as $dt){
                         if($dt->today_covid > $dataF['NewConfirmed'] || $dt->today_covid < $dataF['NewConfirmed']){
                             $lineNotify->send("จำนวนผู้ป่วยโควิด : ".$dataF['NewConfirmed']);
